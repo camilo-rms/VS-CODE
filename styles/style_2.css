@@ -1,0 +1,259 @@
+/* ENTÊTE (HEADER) */
+header {
+    position: fixed;
+    z-index: 3;
+    margin: 0;
+    padding: 0;
+    left: 0px;
+    user-select: none;
+    height: calc(0.8 * 42px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+	color: rgb(231, 231, 231);
+    background-color: rgb(24, 24, 24);
+}
+
+header p {
+    color: rgb(184, 185, 185);
+    margin: 8px;
+}
+
+/* ENTÊTE - BOUTONS */
+header .headerBouton {
+    border-radius: 5px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+}
+
+header .headerBouton:hover, header .headerBoutonHover {
+    background-color: rgb(46, 46, 46);
+}
+
+header .headerBulle {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: rgb(31, 31, 31);
+    border: calc(0.8 * 1px) solid rgb(69, 69, 69);
+    border-radius: 5px;
+    cursor: default;
+    min-width: 100px;
+}
+
+header .headerBulle p {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    margin: 0;
+    padding: 5px 25px;
+}
+
+header .headerBulle span {
+    color: rgb(162, 162, 162);
+    margin-left: 60px;
+}
+
+header .headerBulle p:hover, header .headerBulle p:hover span {
+    text-decoration: none;
+    background-color: rgb(0, 120, 212);
+    border-radius: 4px;
+	color: rgb(231, 231, 231);
+}
+
+.headerBulle hr {
+    height: 1px;
+    width: 100%;
+    background-color: rgb(69, 69, 69);
+}
+
+header .headerBulleSection {
+    margin: 4px;
+    display: inline-block;
+    box-sizing: border-box;
+    width: calc(100% - 8px);
+}
+
+/* ENTÊTE - BARRE DE RECHERCHE */
+.barreDeRecherche {
+    z-index: 1;
+    position: absolute;
+    width: calc(0.8 * 725px);
+    height: calc(0.8 * 85%);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgb(178, 178, 178);
+    gap: 4px;
+    cursor: not-allowed;
+    background-color: rgb(36, 36, 36);
+    border: calc(0.8 * 1px) solid rgb(69, 69, 69);
+}
+
+.barreDeRecherche:hover {
+    background-color: rgb(42, 42, 42);
+    border: calc(0.8 * 1px) solid rgb(91, 91, 91);    
+}
+
+
+
+
+
+/* BARRE LATÉRALE (ASIDE) */
+aside {
+    position: fixed;
+    height: 100%;
+    width: calc(0.8 * 212px);
+	background-color: rgb(24, 24, 24);
+    left: 0px;
+    top: calc(0.8 * 42px + 1px);
+    user-select: none;
+}
+
+.titreLatéral {
+    z-index: 1;
+    height: calc(0.8 * 27px);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.titreLatéral p {
+    margin: 0;
+    padding: 0;
+    margin-left: calc(0.8 * 28px);
+    font-size: calc(0.8 * 1em);
+    font-weight: 500;
+    padding-top: 1px;
+}
+
+.titreLatéral:hover {
+    background-color: rgb(44, 44, 44);
+}
+
+/* BARRE LATÉRALE - BOUTONS */
+.boutonLatéral {
+    z-index: 10;
+    height: calc(0.8 * 27px);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-right: 2px solid rgb(62, 62, 62);
+}
+
+.boutonLatéral p {
+    margin: 0;
+    padding: 0;
+    margin-left: calc(0.8 * 10px);
+    font-size: calc(0.8 * 1em);
+    padding-top: 1px;
+}
+
+.boutonLatéral:hover {
+    background-color: rgb(44, 44, 44);
+}
+
+.boutonLatéralInnactif {
+    border-right: 0;
+}
+
+.imageLatérale {
+    height: 50%;
+    margin-left: calc(0.8 * 40px);
+    padding-top: 5px;
+}
+
+
+
+
+
+/* CONTENU PRINCIPAL (MAIN) */
+main {
+    position: absolute;
+    z-index: 1;
+    width: calc(100% - (0.8 * 212px + 1px + 0.8 * 85px));
+    top: calc(0.8 * 2 * 41px);
+    left: calc(0.8 * 212px + 1px);
+    overflow: hidden;
+    padding-bottom: calc(0.8 * 26px + 1px);
+    font-family: Consolas, 'Courier New', monospace;
+    font-weight: 200;
+    font-size: calc(0.8 * 1.1em);
+    color: rgb(116, 116, 116);
+    margin-top: 5px;
+    padding-left: calc(0.8 * 85px);
+    line-height: 20px;
+    user-select: none;
+}
+
+main button {
+    all: unset;
+    color: rgb(241, 191, 12);
+    user-select: none;
+}
+
+.adresse {
+    color: rgb(162, 163, 162);
+    position: absolute;
+    left: calc(0.8 * 20px);
+    font-size:0.9em;
+    font-weight: 400;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.numérotation {
+    color: rgb(110, 118, 129);
+    transform: translateX(-39px);
+    position: absolute;
+    text-align: end;   
+    user-select: none;
+}
+
+.contenu {
+    display: block;
+    user-select: text;
+}
+
+.styleHover:hover {
+    color: rgb(207, 207, 207);
+}
+
+
+
+
+
+/* PIED DE PAGE (FOOTER) */
+footer {
+	position: fixed;
+	z-index: 4;
+	background-color: rgb(24, 24, 24);
+    height: calc(0.8 * 26px);
+	width: 100%;
+    bottom: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    left: 0px;
+    user-select: none;
+}
+
+.textePiedDePage {
+    position: inherit;
+    z-index: 100;
+    bottom: -10px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
