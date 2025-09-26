@@ -80,6 +80,32 @@ header .headerBulleSection {
     width: calc(100% - 8px);
 }
 
+header .headerBulleConf {
+    position: absolute;
+    left: calc(100% + 4px);
+    
+    font-weight: 400;
+    font-size: 13px;
+    color: rgb(184, 185, 185);
+    background-color: rgb(31, 31, 31);
+    border: calc(0.8 * 1px) solid rgb(69, 69, 69);
+    border-radius: 5px;
+    justify-content: space-between;
+    white-space: nowrap;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+}
+
+header .headerBulleConf a {
+    padding: 0 5px;
+}
+
+header .headerBulleConf p {
+    font-size: 13px;
+    padding: 5px 10px;
+}
+
 /* ENTÊTE - BARRE DE RECHERCHE */
 .barreDeRecherche {
     z-index: 1;

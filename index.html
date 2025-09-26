@@ -1,11 +1,10 @@
 <!--
--Finir le travail sur le tableau notesCons (notesConsidérées) et s'occuper la fonction qui ajoute les notes dans le tableau avec deux modes; 5 notes, toutes les notes.
+-Mettre les classes en KebabCase.
 -Ajouter les boutons de confirmation quand on reset les notes ou quand on en importe.
+-Finir le travail sur le tableau notesCons (notesConsidérées) et s'occuper la fonction qui ajoute les notes dans le tableau avec deux modes; 5 notes, toutes les notes.
 -Ajouter d'autres variables dans les fichiers exportés comme le nom, prénom, la classe.
 -Ajouter la sauvegarde dans le localStorage de l'affichage des éléments et de la période sélectionnées.
 -Améliorer l'affichage d'erreur à l'ajout des notes.
--Diminuer le nombre de classes en utilisant les balises natives
--Mettre les classes en KebabCase.
 -->
 
 
@@ -32,6 +31,11 @@
     <div class="headerBulle">
         <div class="headerBulleSection">
             <p onclick="importer()">Ouvrir un fichier de notes<span>Ctrl+Shift+O</span></p>
+            <div class="headerBulleConf">
+                <a>Êtes-vous sûr ?</a>
+                <p>Oui</p>
+                <p>Non</p>
+            </div>
             <p onclick="exporter()">Exporter les notes<span>Ctrl+Shift+S</span></p>
         </div>
         <hr>

@@ -245,8 +245,8 @@ let headerBulle;
 document.addEventListener("click", e => {
 
 	// CONDITIONS AU CLIC
-	if (e.target.closest("header div")) {
-		headerBouton = e.target.closest("header div");
+	if (e.target.closest(".headerBouton")) {
+		headerBouton = e.target.closest(".headerBouton");
 		headerBulle = headerBouton.querySelector(".headerBulle")
 
 		if (headerBulle.style.display === "block") headerBulleOff();
@@ -258,13 +258,13 @@ document.addEventListener("click", e => {
 	function headerBulleOn() {
 		headerBulleOff();
 		headerBulle.style.display = "block";
-		headerBouton.classList.add("headerHover");
+		headerBouton.classList.add("headerBoutonHover");
 		console.log("Bouton cliqué");
 	}
 	function headerBulleOff() {
 		document.querySelectorAll(".headerBulle").forEach(e => {
 			e.style.display = "none";
-			e.closest("header div").classList.remove("headerHover");
+			e.closest(".headerBouton").classList.remove("headerBoutonHover");
 		})
 	}
 })
