@@ -16,26 +16,6 @@ p {
     font-size: 0.8em;
 }
 
-input {
-    all: unset;
-    font-family: Consolas, 'Courier New', monospace;
-    color: rgb(116, 116, 116);
-    width: calc(3 * 8px);
-}
-
-input:focus, button:focus {
-    outline: 2px solid rgb(40, 40, 40);
-}
-
-input:hover {
-    cursor: pointer;
-}
-
-button:hover {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
 ::selection {
     background-color: rgb(38, 79, 120);
 }
@@ -47,10 +27,6 @@ hr {
     background-color: rgb(40, 40, 40);
     height: calc(0.8 * 1px);
     width: 100%;
-}
-
-button, section, button:hover, button:focus {
-    all: unset;
 }
 
 /* CONFIGURATION DES TABLEAUX */

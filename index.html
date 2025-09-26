@@ -5,6 +5,7 @@
 -Ajouter d'autres variables dans les fichiers exportés comme le nom, prénom, la classe.
 -Ajouter la sauvegarde dans le localStorage de l'affichage des éléments et de la période sélectionnées.
 -Améliorer l'affichage d'erreur à l'ajout des notes.
+-Ajouter la date comme propriété pour une note à l'ajout.
 -->
 
 
@@ -30,17 +31,22 @@
     <p>Fichier</p>
     <div class="headerBulle">
         <div class="headerBulleSection">
-            <p onclick="importer()">Ouvrir un fichier de notes<span>Ctrl+Shift+O</span></p>
+            <p class="headerBoutonConf">Ouvrir un fichier de notes<span>Ctrl+Shift+O</span></p>
             <div class="headerBulleConf">
                 <a>Êtes-vous sûr ?</a>
-                <p>Oui</p>
+                <p onclick="importer()">Oui</p>
                 <p>Non</p>
             </div>
             <p onclick="exporter()">Exporter les notes<span>Ctrl+Shift+S</span></p>
         </div>
         <hr>
         <div class="headerBulleSection">
-            <p onclick="notesRéinit()">Réinitialiser les notes</p>
+            <p class="headerBoutonConf">Réinitialiser les notes</p>
+            <div class="headerBulleConf">
+                <a>Êtes-vous sûr ?</a>
+                <p onclick="notesRéinit()">Oui</p>
+                <p>Non</p>
+            </div>
         </div>
     </div>
 </div>

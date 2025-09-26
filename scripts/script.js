@@ -247,9 +247,8 @@ document.addEventListener("click", e => {
 	// CONDITIONS AU CLIC
 	if (e.target.closest(".headerBouton")) {
 		headerBouton = e.target.closest(".headerBouton");
-		headerBulle = headerBouton.querySelector(".headerBulle")
-
-		if (headerBulle.style.display === "block") headerBulleOff();
+		headerBulle = headerBouton.querySelector(".headerBulle");
+		if (headerBulle.style.display === "block" && !e.target.closest(".headerBoutonConf")) headerBulleOff();
 		else headerBulleOn();
 	}
 	else headerBulleOff();
@@ -264,7 +263,36 @@ document.addEventListener("click", e => {
 	function headerBulleOff() {
 		document.querySelectorAll(".headerBulle").forEach(e => {
 			e.style.display = "none";
-			e.closest(".headerBouton").classList.remove("headerBoutonHover");
+			headerBouton.classList.remove("headerBoutonHover");
+		})
+	}
+})
+
+// AFFICHAGE DES BOUTON DE CONFIRMATION
+let headerBoutonConf;
+let headerBulleConf;
+document.addEventListener("click", e => {
+
+	// CONDITIONS AU CLIC
+	if (e.target.closest(".headerBoutonConf")) {
+		headerBoutonConf = e.target.closest(".headerBoutonConf");
+		headerBulleConf = headerBoutonConf.nextElementSibling;
+		if (headerBulleConf.style.display === "flex") headerBulleConfOff();
+		else headerBulleConfOn();
+	}
+	else headerBulleConfOff();
+
+	// ON/OFF DE LA BULLE
+	function headerBulleConfOn() {
+		headerBulleConfOff();
+		headerBulleConf.style.display = "flex";
+		headerBoutonConf.classList.add("headerBoutonConfHover");
+		console.log("Confirmation");
+	}
+	function headerBulleConfOff() {
+		document.querySelectorAll(".headerBulleConf").forEach(e => {
+			e.style.display = "none";
+			headerBoutonConf.classList.remove("headerBoutonConfHover");
 		})
 	}
 })
