@@ -263,7 +263,9 @@ document.addEventListener("click", e => {
 	function headerBulleOff() {
 		document.querySelectorAll(".headerBulle").forEach(e => {
 			e.style.display = "none";
-			headerBouton.classList.remove("headerBoutonHover");
+		})
+		document.querySelectorAll(".headerBouton").forEach(e => {
+			e.classList.remove("headerBoutonHover");
 		})
 	}
 })
@@ -292,7 +294,9 @@ document.addEventListener("click", e => {
 	function headerBulleConfOff() {
 		document.querySelectorAll(".headerBulleConf").forEach(e => {
 			e.style.display = "none";
-			headerBoutonConf.classList.remove("headerBoutonConfHover");
+		})
+		document.querySelectorAll(".headerBoutonConf").forEach(e => {
+			e.classList.remove("headerBoutonConfHover");
 		})
 	}
 })

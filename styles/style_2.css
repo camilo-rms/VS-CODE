@@ -64,7 +64,8 @@ header p {
 
 .headerBulle p:hover,
 .headerBulle p:hover span,
-.headerBoutonConfHover{
+.headerBoutonConfHover,
+.headerBoutonConfHover span{
     text-decoration: none;
     background-color: rgb(0, 120, 212);
     border-radius: 4px;
