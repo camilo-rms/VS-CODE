@@ -1,6 +1,5 @@
 <!--
--Mettre les classes en KebabCase.
--Finir le travail sur le tableau notesCons (notesConsidérées) et s'occuper la fonction qui ajoute les notes dans le tableau avec deux modes; 5 notes, toutes les notes.
+-EN COURS : Finir le travail sur le tableau notesCons (notesConsidérées) et s'occuper la fonction qui ajoute les notes dans le tableau avec deux modes; 5 notes, toutes les notes.
 -Ajouter d'autres variables dans les fichiers exportés comme le nom, prénom, la classe.
 -Ajouter la sauvegarde dans le localStorage de l'affichage des éléments et de la période sélectionnées.
 -Améliorer l'affichage d'erreur à l'ajout des notes.
@@ -23,15 +22,15 @@
 
 <body><header>
 <img src="images/logo_vs_note.png" style="height: 60%; margin-left: 8px;">
-<div class="headerBouton" style="cursor: not-allowed; margin-left: 7px; z-index: 2;">
+<div class="header-bouton" style="cursor: not-allowed; margin-left: 7px; z-index: 2;">
     <p>Visual Studio Note</p>
 </div>
-<div class="headerBouton">
+<div class="header-bouton">
     <p>Fichier</p>
-    <div class="headerBulle">
-        <div class="headerBulleSection">
-            <p class="headerBoutonConf">Ouvrir un fichier de notes<span>Ctrl+Shift+O</span></p>
-            <div class="headerBulleConf">
+    <div class="header-bulle">
+        <div class="header-bulle-section">
+            <p class="header-bouton-conf">Ouvrir un fichier de notes<span>Ctrl+Shift+O</span></p>
+            <div class="header-bulle-conf">
                 <a>Êtes-vous sûr ?</a>
                 <p onclick="importer()">Oui</p>
                 <p>Non</p>
@@ -39,9 +38,9 @@
             <p onclick="exporter()">Exporter les notes<span>Ctrl+Shift+S</span></p>
         </div>
         <hr>
-        <div class="headerBulleSection">
-            <p class="headerBoutonConf">Réinitialiser les notes</p>
-            <div class="headerBulleConf">
+        <div class="header-bulle-section">
+            <p class="header-bouton-conf">Réinitialiser les notes</p>
+            <div class="header-bulle-conf">
                 <a>Êtes-vous sûr ?</a>
                 <p onclick="notesRéinit()">Oui</p>
                 <p>Non</p>
@@ -49,11 +48,11 @@
         </div>
     </div>
 </div>
-<div class="barreDeRecherche">
+<div class="barre-de-recherche">
     <img src="images/recherche_icon.png" style="height: 65%;">
-    <p style="margin-bottom: 14px;">Recherche</p>
+    <p style="transform: translateY(-1px);">Recherche</p>
 </div>
-<div class="headerBouton" style="cursor: not-allowed; right: 8px; position: absolute;">
+<div class="header-bouton" style="cursor: not-allowed; right: 8px; position: absolute;">
     <p id="js-info"></p>
 </div>
 <hr style="top: calc(0.8 * 42px);">
@@ -63,31 +62,31 @@
     
 <aside>
 <hr style="height: calc(100% - 0.8 * (42px + 1px)); width: calc(0.8 * 1px); left: calc(0.8 * 212px); top: calc(0.8 * 2 + 1px);"></div>
-<div class="titreLatéral"><p>PÉRIODES</p></div>
-<div class="boutonLatéral" id="js-semestre-1"><img src="images/horloge_icon_1.png" class="imageLatérale"><p>Semestre 1</p></div>
-<div class="boutonLatéral" id="js-semestre-2"><img src="images/horloge_icon_2.png" class="imageLatérale"><p>Semestre 2</p></div>
-<div class="boutonLatéral" id="js-hors-période"><img src="images/horloge_icon.png" class="imageLatérale"><p>Hors période</p></div>
-<div class="titreLatéral"><p>NOTES</p></div>
-<div class="boutonLatéral" onclick="onOffContenu(this, `div-ajouter-note`)"><img src="images/plus_icon.png" class="imageLatérale"><p>Ajouer une note</p></div>
-<div class="boutonLatéral" onclick="onOffContenu(this, `div-liste-note`)"><img src="images/liste_icon.png" class="imageLatérale"><p>Afficher les note</p></div>
+<div class="titre-aside"><p>PÉRIODES</p></div>
+<div class="bouton-aside" id="js-semestre-1"><img src="images/horloge_icon_1.png" class="image-aside"><p>Semestre 1</p></div>
+<div class="bouton-aside" id="js-semestre-2"><img src="images/horloge_icon_2.png" class="image-aside"><p>Semestre 2</p></div>
+<div class="bouton-aside" id="js-hors-période"><img src="images/horloge_icon.png" class="image-aside"><p>Hors période</p></div>
+<div class="titre-aside"><p>NOTES</p></div>
+<div class="bouton-aside" onclick="onOffContenu(this, `div-ajouter-note`)"><img src="images/plus_icon.png" class="image-aside"><p>Ajouer une note</p></div>
+<div class="bouton-aside" onclick="onOffContenu(this, `div-liste-note`)"><img src="images/liste_icon.png" class="image-aside"><p>Afficher les note</p></div>
 </aside>
 
 
 
 <main>
 <div class="adresse">
-    <span class="styleHover">VS Note</span>
+    <span class="style-hover">VS Note</span>
     <img src="images/adresse_icon.png" width="6.5" style="margin-left: 3px; margin-right: 3px;">
-    <span id="js-sélection-matière" class="styleHover"></span>
+    <span id="js-sélection-matière" class="style-hover"></span>
 </div><br>
 <div class="contenu" id="div-ajouter-note">
     <div class="numérotation">1<br>2<br>3<br>4<br>5<br>6</div>
     <a class="vert">//-Ajouter-une-note---------------------------------------------------------------------------</a><br>
-    <span class="bleuClair">Matière</span><span class="blanc"> : </span><input id="js-matière" style="width: 40px;" autocomplete="off" maxlength="5" placeholder="..."><br>
-    <span class="bleuClair">Note</span><span class="blanc"> : </span><input id="js-note" autocomplete="off" maxlength="3" placeholder="...">/<input id="js-note-dénom" class="saisieNombre" autocomplete="off" maxlength="3" placeholder="..."><br>
-    <span class="bleuClair">Moyenne de classe</span><span class="blanc"> : </span><input id="js-moy-classe" autocomplete="off" maxlength="3" placeholder="..."><br>
-    <span class="bleuClair">Coef</span><span class="blanc"> : </span><input id="js-note-coef" autocomplete="off" maxlength="2" placeholder="..."><br>
-    <button onclick="noteAjout()">> Valider?</button> <span class="vert" id="js-note-ajout"></span><span class="rouge" id="js-erreur"></span><span class="vertClair" id="js-pas-erreur"></span><br><br>
+    <span class="bleu-clair">Matière</span><span class="blanc"> : </span><input id="js-matière" style="width: 40px;" autocomplete="off" maxlength="5" placeholder="..."><br>
+    <span class="bleu-clair">Note</span><span class="blanc"> : </span><input id="js-note" autocomplete="off" maxlength="3" placeholder="...">/<input id="js-note-dénom" class="saisieNombre" autocomplete="off" maxlength="3" placeholder="..."><br>
+    <span class="bleu-clair">Moyenne de classe</span><span class="blanc"> : </span><input id="js-moy-classe" autocomplete="off" maxlength="3" placeholder="..."><br>
+    <span class="bleu-clair">Coef</span><span class="blanc"> : </span><input id="js-note-coef" autocomplete="off" maxlength="2" placeholder="..."><br>
+    <button onclick="noteAjout()">> Valider?</button> <span class="vert" id="js-note-ajout"></span><span class="rouge" id="js-erreur"></span><span class="vert-clair" id="js-pas-erreur"></span><br><br>
 </div>
 <div class="contenu" id="div-liste-note">
     <div class="numérotation">1<br>2<br>3</div>
@@ -109,6 +108,6 @@
 
 <footer>
 <hr style="bottom: calc(0.8 * 26px);">
-<p id="js-compteur-fonctions" class="textePiedDePage"></p>
-<p id="js-vs-note-version" class="textePiedDePage" style="right : 0px"></p>
+<p id="js-compteur-fonctions" class="texte-footer"></p>
+<p id="js-vs-note-version" class="texte-footer" style="right : 0px"></p>
 </footer></body>

@@ -21,7 +21,7 @@ header p {
 }
 
 /* ENTÊTE - BOUTONS */
-.headerBouton {
+.header-bouton {
     border-radius: 5px;
     height: 20px;
     display: flex;
@@ -31,12 +31,12 @@ header p {
     z-index: 3;
 }
 
-.headerBouton:hover,
-.headerBoutonHover {
+.header-bouton:hover,
+.header-bouton-hover {
     background-color: rgb(46, 46, 46);
 }
 
-.headerBulle {
+.header-bulle {
     display: none;
     position: absolute;
     top: 100%;
@@ -47,7 +47,7 @@ header p {
     min-width: 100px;
 }
 
-.headerBulle p {
+.header-bulle p {
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -57,35 +57,35 @@ header p {
 	color: rgb(194, 194, 194);
 }
 
-.headerBulle span {
+.header-bulle span {
     color: rgb(162, 162, 162);
     margin-left: 60px;
 }
 
-.headerBulle p:hover,
-.headerBulle p:hover span,
-.headerBoutonConfHover,
-.headerBoutonConfHover span{
+.header-bulle p:hover,
+.header-bulle p:hover span,
+.header-bouton-conf-hover,
+.header-bouton-conf-hover span{
     text-decoration: none;
     background-color: rgb(0, 120, 212);
     border-radius: 4px;
 	color: rgb(231, 231, 231) !important;
 }
 
-.headerBulle hr {
+.header-bulle hr {
     height: 1px;
     width: 100%;
     background-color: rgb(69, 69, 69);
 }
 
-.headerBulleSection {
+.header-bulle-section {
     margin: 4px;
     display: inline-block;
     box-sizing: border-box;
     width: calc(100% - 8px);
 }
 
-.headerBulleConf {
+.header-bulle-conf {
     display: none;
     position: absolute;
     left: calc(100% + 4px);
@@ -103,12 +103,12 @@ header p {
 
 }
 
-.headerBulleConf a {
+.header-bulle-conf a {
     padding: 0 5px;
     color: rgb(162, 162, 162);
 }   
 
-.headerBulleConf p {
+.header-bulle-conf p {
     font-size: 13px;
     padding: 5px 10px;
 	color: rgb(194, 194, 194);
@@ -122,7 +122,7 @@ header button:focus {
 }
 
 /* ENTÊTE - BARRE DE RECHERCHE */
-.barreDeRecherche {
+.barre-de-recherche {
     z-index: 1;
     position: absolute;
     width: calc(0.8 * 725px);
@@ -134,13 +134,12 @@ header button:focus {
     left: 50%;
     transform: translateX(-50%);
     color: rgb(178, 178, 178);
-    gap: 4px;
     cursor: not-allowed;
     background-color: rgb(36, 36, 36);
     border: calc(0.8 * 1px) solid rgb(69, 69, 69);
 }
 
-.barreDeRecherche:hover {
+.barre-de-recherche:hover {
     background-color: rgb(42, 42, 42);
     border: calc(0.8 * 1px) solid rgb(91, 91, 91);    
 }
@@ -160,7 +159,7 @@ aside {
     user-select: none;
 }
 
-.titreLatéral {
+.titre-aside {
     z-index: 1;
     height: calc(0.8 * 27px);
     width: 100%;
@@ -168,7 +167,7 @@ aside {
     padding: 0;
 }
 
-.titreLatéral p {
+.titre-aside p {
     margin: 0;
     padding: 0;
     margin-left: calc(0.8 * 28px);
@@ -177,12 +176,12 @@ aside {
     padding-top: 1px;
 }
 
-.titreLatéral:hover {
+.titre-aside:hover {
     background-color: rgb(44, 44, 44);
 }
 
 /* BARRE LATÉRALE - BOUTONS */
-.boutonLatéral {
+.bouton-aside {
     z-index: 10;
     height: calc(0.8 * 27px);
     width: 100%;
@@ -195,7 +194,7 @@ aside {
     border-right: 2px solid rgb(62, 62, 62);
 }
 
-.boutonLatéral p {
+.bouton-aside p {
     margin: 0;
     padding: 0;
     margin-left: calc(0.8 * 10px);
@@ -203,15 +202,15 @@ aside {
     padding-top: 1px;
 }
 
-.boutonLatéral:hover {
+.bouton-aside:hover {
     background-color: rgb(44, 44, 44);
 }
 
-.boutonLatéralInnactif {
+.bouton-aside-innactif {
     border-right: 0;
 }
 
-.imageLatérale {
+.image-aside {
     height: 50%;
     margin-left: calc(0.8 * 40px);
     padding-top: 5px;
@@ -291,7 +290,7 @@ main button:hover {
     user-select: text;
 }
 
-.styleHover:hover {
+.style-hover:hover {
     color: rgb(207, 207, 207);
 }
 
@@ -314,7 +313,7 @@ footer {
     user-select: none;
 }
 
-.textePiedDePage {
+.texte-footer {
     position: inherit;
     z-index: 100;
     bottom: -10px;
