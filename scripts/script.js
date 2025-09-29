@@ -39,7 +39,7 @@ if (!Array.isArray(notesTempo)) {
 function noteAjout() {
 	compteurFonctionsAjout();
 	aujourdHui = new Date();
-	const listeMatières = ["FR", "ANG", "ESP", "MATHS", "PHYS", "NSI", "SVT", "SES", "HG", "EMC", "EPS"];
+	const listeMatières = ["FR", "ANG", "ESP", "MATHS", "PHYS", "ES", "NSI", "HG", "EMC", "EPS"];
 
 	// DÉFINITIONS
 	const matière = document.getElementById("js-matière").value.toUpperCase();
@@ -52,7 +52,7 @@ function noteAjout() {
 	// ERREUR DE REMPLISSAGE
 	function erreurDeRemplissage(erreur) {
 		document.getElementById("js-erreur").textContent = erreur;
-		document.getElementById("js-pas-erreur").textContent = "";
+		document.getElementById("js-erreur").style.color = "rgb(248, 64, 64)";
 	}
 
 	// CONDITIONS DE VALABILITÉ
@@ -85,7 +85,8 @@ function noteAjout() {
 		console.log("-> Note ajoutée");
 		console.log("    Notes tempo : ", notesTempo);
 		changementnotesCons();
-		document.getElementById("js-pas-erreur").textContent = "Note ajoutée !";
+		document.getElementById("js-erreur").textContent = "Note ajoutée !";
+		document.getElementById("js-erreur").style.color = "rgb(81, 219, 18)";
 	}
 	
 	document.getElementById("js-matière").focus();

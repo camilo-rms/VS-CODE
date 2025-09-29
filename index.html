@@ -2,7 +2,6 @@
 -EN COURS : Finir le travail sur le tableau notesCons (notesConsidérées) et s'occuper la fonction qui ajoute les notes dans le tableau avec deux modes; 5 notes, toutes les notes.
 -Ajouter d'autres variables dans les fichiers exportés comme le nom, prénom, la classe.
 -Ajouter la sauvegarde dans le localStorage de l'affichage des éléments et de la période sélectionnées.
--Améliorer l'affichage d'erreur à l'ajout des notes.
 -Ajouter la date comme propriété pour une note à l'ajout.
 -->
 
@@ -86,7 +85,7 @@
     <span class="bleu-clair">Note</span><span class="blanc"> : </span><input id="js-note" autocomplete="off" maxlength="3" placeholder="...">/<input id="js-note-dénom" class="saisieNombre" autocomplete="off" maxlength="3" placeholder="..."><br>
     <span class="bleu-clair">Moyenne de classe</span><span class="blanc"> : </span><input id="js-moy-classe" autocomplete="off" maxlength="3" placeholder="..."><br>
     <span class="bleu-clair">Coef</span><span class="blanc"> : </span><input id="js-note-coef" autocomplete="off" maxlength="2" placeholder="..."><br>
-    <button onclick="noteAjout()">> Valider?</button> <span class="vert" id="js-note-ajout"></span><span class="rouge" id="js-erreur"></span><span class="vert-clair" id="js-pas-erreur"></span><br><br>
+    <button onclick="noteAjout()">> Valider?</button> <span class="vert" id="js-note-ajout"></span><span id="js-erreur"></span><br><br>
 </div>
 <div class="contenu" id="div-liste-note">
     <div class="numérotation">1<br>2<br>3</div>
