@@ -193,31 +193,33 @@ if (dateMois > 6 && dateMois < 9) {
 }
 
 // GESTION DES BOUTONS DE SÉLECTION DE LA PÉRIODE
-document.addEventListener("click", e => {
-	if (e.target.closest("#js-semestre-1")) {
-		sélectionPériode = "Semestre 1";
-		divSemestre1.classList.remove("bouton-aside-innactif");
-		divSemestre2.classList.add("bouton-aside-innactif");
-		divHorsPériode.classList.add("bouton-aside-innactif");
-		console.log(`Période selectionnée : Semestre 1`);
-		changementnotesCons();
-	} else if (e.target.closest("#js-semestre-2")) {
-		sélectionPériode = "Semestre 2";
-		divSemestre1.classList.add("bouton-aside-innactif");
-		divSemestre2.classList.remove("bouton-aside-innactif");
-		divHorsPériode.classList.add("bouton-aside-innactif");
-		console.log(`Période selectionnée : Semestre 2`);
-		changementnotesCons();
-	} else if (e.target.closest("#js-hors-période")) {
-		sélectionPériode = "Hors période";
-		divSemestre1.classList.add("bouton-aside-innactif");
-		divSemestre2.classList.add("bouton-aside-innactif");
-		divHorsPériode.classList.remove("bouton-aside-innactif");
-		console.log(`Période selectionnée : Hors période`);
-		changementnotesCons();
-	}
+document.querySelectorAll(".bouton-aside").forEach(e => {
+	e.addEventListener("click", e => {
+		if (e.target.closest("#js-semestre-1")) {
+			sélectionPériode = "Semestre 1";
+			divSemestre1.classList.remove("bouton-aside-innactif");
+			divSemestre2.classList.add("bouton-aside-innactif");
+			divHorsPériode.classList.add("bouton-aside-innactif");
+			console.log(`Période selectionnée : Semestre 1`);
+			changementnotesCons();
+		} else if (e.target.closest("#js-semestre-2")) {
+			sélectionPériode = "Semestre 2";
+			divSemestre1.classList.add("bouton-aside-innactif");
+			divSemestre2.classList.remove("bouton-aside-innactif");
+			divHorsPériode.classList.add("bouton-aside-innactif");
+			console.log(`Période selectionnée : Semestre 2`);
+			changementnotesCons();
+		} else if (e.target.closest("#js-hors-période")) {
+			sélectionPériode = "Hors période";
+			divSemestre1.classList.add("bouton-aside-innactif");
+			divSemestre2.classList.add("bouton-aside-innactif");
+			divHorsPériode.classList.remove("bouton-aside-innactif");
+			console.log(`Période selectionnée : Hors période`);
+			changementnotesCons();
+		}
+	})
 })
-
+	
 
 
 
@@ -243,69 +245,73 @@ function onOffContenu(bouton, id) {
 // AFFICHAGE DES BOUTON DANS L'ENTÊTE 
 let headerBouton;
 let headerBulle;
-document.addEventListener("click", e => {
-
-	// CONDITIONS AU CLIC
-	if (e.target.closest(".header-bouton")) {
-		headerBouton = e.target.closest(".header-bouton");
-		headerBulle = headerBouton.querySelector(".header-bulle");
-		if (headerBulle.style.display === "block" && !e.target.closest(".header-bouton-conf")) headerBulleOff();
-		else headerBulleOn();
-	}
-	else headerBulleOff();
-
-	// ON/OFF DE LA BULLE
-	function headerBulleOn() {
-		compteurFonctionsAjout();
-		headerBulleOff();
-		headerBulle.style.display = "block";
-		headerBouton.classList.add("header-bouton-hover");
-		console.log("Bouton cliqué");
-	}
-	function headerBulleOff() {
-		compteurFonctionsAjout();
-		document.querySelectorAll(".header-bulle").forEach(e => {
-			e.style.display = "none";
-		})
-		document.querySelectorAll(".header-bouton").forEach(e => {
-			e.classList.remove("header-bouton-hover");
-		})
-	}
+document.querySelectorAll(".header-bouton").forEach(e => {
+	e.addEventListener("click", e => {
+		
+		// CONDITIONS AU CLIC
+		if (e.target.closest(".header-bouton")) {
+			headerBouton = e.target.closest(".header-bouton");
+			headerBulle = headerBouton.querySelector(".header-bulle");
+			if (headerBulle.style.display === "block" && !e.target.closest(".header-bouton-conf")) headerBulleOff();
+			else headerBulleOn();
+		}
+		else headerBulleOff();
+		
+		// ON/OFF DE LA BULLE
+		function headerBulleOn() {
+			compteurFonctionsAjout();
+			headerBulleOff();
+			headerBulle.style.display = "block";
+			headerBouton.classList.add("header-bouton-hover");
+			console.log("Bouton cliqué");
+		}
+		function headerBulleOff() {
+			compteurFonctionsAjout();
+			document.querySelectorAll(".header-bulle").forEach(e => {
+				e.style.display = "none";
+			})
+			document.querySelectorAll(".header-bouton").forEach(e => {
+				e.classList.remove("header-bouton-hover");
+			})
+		}
+	})
 })
 
 // AFFICHAGE DES BOUTON DE CONFIRMATION
 let headerBoutonConf;
 let headerBulleConf;
-document.addEventListener("click", e => {
-
-	// CONDITIONS AU CLIC
-	if (e.target.closest(".header-bouton-conf")) {
-		headerBoutonConf = e.target.closest(".header-bouton-conf");
-		headerBulleConf = headerBoutonConf.nextElementSibling;
-		if (headerBulleConf.style.display === "flex") headerBulleConfOff();
-		else headerBulleConfOn();
-	}
-	else headerBulleConfOff();
-
-	// ON/OFF DE LA BULLE
-	function headerBulleConfOn() {
-		compteurFonctionsAjout();
-		headerBulleConfOff();
-		headerBulleConf.style.display = "flex";
-		headerBoutonConf.classList.add("header-bouton-conf-hover");
-		console.log("Confirmation");
-	}
-	function headerBulleConfOff() {
-		compteurFonctionsAjout();
-		document.querySelectorAll(".header-bulle-conf").forEach(e => {
-			e.style.display = "none";
-		})
-		document.querySelectorAll(".header-bouton-conf").forEach(e => {
-			e.classList.remove("header-bouton-conf-hover");
-		})
-	}
+document.querySelectorAll(".header-bouton").forEach(e => {
+	e.addEventListener("click", e => {
+		
+		// CONDITIONS AU CLIC
+		if (e.target.closest(".header-bouton-conf")) {
+			headerBoutonConf = e.target.closest(".header-bouton-conf");
+			headerBulleConf = headerBoutonConf.nextElementSibling;
+			if (headerBulleConf.style.display === "flex") headerBulleConfOff();
+			else headerBulleConfOn();
+		}
+		else headerBulleConfOff();
+		
+		// ON/OFF DE LA BULLE
+		function headerBulleConfOn() {
+			compteurFonctionsAjout();
+			headerBulleConfOff();
+			headerBulleConf.style.display = "flex";
+			headerBoutonConf.classList.add("header-bouton-conf-hover");
+			console.log("Confirmation");
+		}
+		function headerBulleConfOff() {
+			compteurFonctionsAjout();
+			document.querySelectorAll(".header-bulle-conf").forEach(e => {
+				e.style.display = "none";
+			})
+			document.querySelectorAll(".header-bouton-conf").forEach(e => {
+				e.classList.remove("header-bouton-conf-hover");
+			})
+		}
+	})
 })
-
+	
 
 
 
