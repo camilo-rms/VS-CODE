@@ -250,12 +250,11 @@ main button {
     all: unset;
     user-select: none;
     cursor: pointer;
-    color: rgb(241, 191, 12);
 }
 
 main input:focus,
 main button:focus {
-    outline: 2px solid rgb(40, 40, 40) !important;
+    outline: 2px solid rgb(40, 40, 40);
 }
 
 main input:hover {
@@ -265,7 +264,6 @@ main input:hover {
 main button:hover {
     cursor: pointer;
     text-decoration: underline;
-    color: rgb(241, 191, 12);
 }
 
 .adresse {
@@ -275,6 +273,10 @@ main button:hover {
     font-size:0.9em;
     font-weight: 400;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.adresse span {
+    position: relative;
 }
 
 .numérotation {
@@ -292,6 +294,10 @@ main button:hover {
 
 .style-hover:hover {
     color: rgb(207, 207, 207);
+}
+
+.style-aucun-focus:focus {
+    outline: 0;
 }
 
 

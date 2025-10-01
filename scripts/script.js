@@ -310,11 +310,13 @@ document.addEventListener("click", e => {
 
 
 
-// DÉFINITION DES NOTES CONSIDÉRÉES
+// ACUTALISATION DES NOTES CONSIDÉRÉES ET CONTENUS
 let notesCons = [];
 
 function changementnotesCons() {
 	compteurFonctionsAjout();
+
+	// DÉFINITIONS DES NOTES CONSIDÉRÉES
 	notesCons = [];
 	if (sélectionMatière === "Toutes les matières") {
 		if (sélectionPériode === "Semestre 1" || sélectionPériode === "Semestre 2") {
@@ -353,15 +355,16 @@ function changementnotesCons() {
 
 
 // DÉFINITIONS ET APPELS DE FONCTIONS
-const nom = "Camilo Ramos Jaussi";
-const classe = "1GC";
-const vsNoteVersion = "BETA";
+const infoNom = "Camilo Ramos Jaussi";
+const infoClasse = "1GC";
+const infoVersion = "BETA";
 
 addEventListener("DOMContentLoaded", (event) => {
-	document.getElementById("js-info").textContent = `${nom} - ${classe}`;
-	document.getElementById("js-vs-note-version").textContent = `Visual Studio Note ${vsNoteVersion}`;
+	document.getElementById("js-info-nom").textContent = `${infoNom}`;
+	document.getElementById("js-info").textContent = `${infoNom} - ${infoClasse}`;
+	document.getElementById("js-info-version").textContent = `Visual Studio Note ${infoVersion}`;
+	document.getElementById("js-info-matière").textContent = `Toutes les matières`;
 	document.getElementById("js-note-dénom").value = "20";
 	document.getElementById("js-note-coef").value = "1";
-	document.getElementById("js-sélection-matière").textContent = `Toutes les matières`;
 	changementnotesCons();
 })

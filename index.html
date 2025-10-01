@@ -74,10 +74,13 @@
 
 <main>
 <div class="adresse">
-    <span class="style-hover">VS Note</span>
+    <span class="style-hover">Virtual Studio Note</span>
     <img src="images/adresse_icon.png" width="6.5" style="margin-left: 3px; margin-right: 3px;">
-    <span id="js-sélection-matière" class="style-hover"></span>
+    <span id="js-info-nom" class="style-hover"></span>
+    <img src="images/adresse_icon.png" width="6.5" style="margin-left: 3px; margin-right: 3px;">
+    <span id="js-info-matière" class="style-hover"></span>
 </div><br>
+
 <div class="contenu" id="div-ajouter-note">
     <div class="numérotation">1<br>2<br>3<br>4<br>5<br>6</div>
     <a class="vert">//-Ajouter-une-note---------------------------------------------------------------------------</a><br>
@@ -85,12 +88,13 @@
     <span class="bleu-clair">Note</span><span class="blanc"> : </span><input id="js-note" autocomplete="off" maxlength="3" placeholder="...">/<input id="js-note-dénom" class="saisieNombre" autocomplete="off" maxlength="3" placeholder="..."><br>
     <span class="bleu-clair">Moyenne de classe</span><span class="blanc"> : </span><input id="js-moy-classe" autocomplete="off" maxlength="3" placeholder="..."><br>
     <span class="bleu-clair">Coef</span><span class="blanc"> : </span><input id="js-note-coef" autocomplete="off" maxlength="2" placeholder="..."><br>
-    <button onclick="noteAjout()">> Valider?</button> <span class="vert" id="js-note-ajout"></span><span id="js-erreur"></span><br><br>
+    <button onclick="noteAjout()" style="color: rgb(241, 191, 12);">> Valider?</button> <span class="vert" id="js-note-ajout"></span><span id="js-erreur"></span><br><br>
 </div>
+
 <div class="contenu" id="div-liste-note">
-    <div class="numérotation">1<br>2<br>3</div>
+    <div class="numérotation">1<br>2</div>
     <a class="vert">//-Les-notes-les-plus-récentes----------------------------------------------------------------</a><br>
-    <table id="tab-notes">
+    <table>
         <tr>
             <td>Note</td>
             <td>Note/20</td>
@@ -100,6 +104,7 @@
             <td>Impact</td>
         </tr>
     </table>
+    <button onclick="contenuTableau" class="gris style-aucun-focus">Afficher moins</button>
 </div>
 </main>
     
@@ -108,5 +113,5 @@
 <footer>
 <hr style="bottom: calc(0.8 * 26px);">
 <p id="js-compteur-fonctions" class="texte-footer"></p>
-<p id="js-vs-note-version" class="texte-footer" style="right : 0px"></p>
+<p id="js-info-version" class="texte-footer" style="right : 0px"></p>
 </footer></body>
