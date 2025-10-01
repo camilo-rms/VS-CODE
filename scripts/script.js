@@ -32,9 +32,7 @@ function compteurFonctionsAjout() {
 
 // AJOUT DE NOTES
 let notesTempo = JSON.parse(localStorage.getItem("notes"));
-if (!Array.isArray(notesTempo)) {
-	notesTempo = [];
-}
+if (!Array.isArray(notesTempo)) notesTempo = [];
 
 function noteAjout() {
 	compteurFonctionsAjout();
@@ -61,7 +59,6 @@ function noteAjout() {
 	else if (note < 0 || isNaN(note) || note === "" || note > 1.1 * noteDénom) erreurDeRemplissage(`Note incorrecte`);
 	else if (moyClasse < 0 || isNaN(moyClasse) || moyClasse === "" || moyClasse > 1.1 * noteDénom) erreurDeRemplissage(`Moyenne de classe incorrecte`);
 	else if (noteCoef < 0 || isNaN(noteCoef) || noteCoef === "") erreurDeRemplissage(`Coefficient incorrect`);
-	
 	else {
 		document.getElementById("js-erreur").textContent = "";
 
@@ -77,18 +74,17 @@ function noteAjout() {
 			id: noteId,
 			timeStamp: aujourdHui.getTime(),
 			période: sélectionPériode
-		})
+		});
 
 		// FINALISATIONS
 		notesTempo.sort((a, b) => b.timeStamp - a.timeStamp);
 		localStorage.setItem("notes", JSON.stringify(notesTempo));
 		console.log("-> Note ajoutée");
 		console.log("    Notes tempo : ", notesTempo);
-		changementnotesCons();
+		changementNotesCons();
 		document.getElementById("js-erreur").textContent = "Note ajoutée !";
 		document.getElementById("js-erreur").style.color = "rgb(81, 219, 18)";
 	}
-	
 	document.getElementById("js-matière").focus();
 }
 
@@ -122,7 +118,6 @@ function importer() {
 	importInput.type = "file";
 	importInput.accept = ".json";
 	importInput.click();
-
 	importInput.onchange = e => {
 		const file = e.target.files[0];
 		const reader = new FileReader();
@@ -132,13 +127,14 @@ function importer() {
 				notesTempo = tempoImport;
 				localStorage.setItem("notes", JSON.stringify(tempoImport));
 				console.log("Notes importées");
+				console.log("Confirmation");
+				changementNotesCons();
 			} catch (err) {
 				return;
 			}
-		}
+		};
 		reader.readAsText(file);
-	}
-	changementnotesCons();
+	};
 }
 
 // RÉINITIALISATION
@@ -146,7 +142,7 @@ function notesRéinit() {
 	compteurFonctionsAjout();
 	localStorage.removeItem("notes");
 	notesTempo = [];
-	changementnotesCons();
+	changementNotesCons();
 	console.log("Notes réinitialisées");
 }
 
@@ -165,7 +161,7 @@ document.addEventListener('keydown', function(e) {
 		importer();
 		console.log("*Ctrl+Shift+O*");
 	}
-})
+});
 
 
 
@@ -201,24 +197,24 @@ document.querySelectorAll(".bouton-aside").forEach(e => {
 			divSemestre2.classList.add("bouton-aside-innactif");
 			divHorsPériode.classList.add("bouton-aside-innactif");
 			console.log(`Période selectionnée : Semestre 1`);
-			changementnotesCons();
+			changementNotesCons();
 		} else if (e.target.closest("#js-semestre-2")) {
 			sélectionPériode = "Semestre 2";
 			divSemestre1.classList.add("bouton-aside-innactif");
 			divSemestre2.classList.remove("bouton-aside-innactif");
 			divHorsPériode.classList.add("bouton-aside-innactif");
 			console.log(`Période selectionnée : Semestre 2`);
-			changementnotesCons();
+			changementNotesCons();
 		} else if (e.target.closest("#js-hors-période")) {
 			sélectionPériode = "Hors période";
 			divSemestre1.classList.add("bouton-aside-innactif");
 			divSemestre2.classList.add("bouton-aside-innactif");
 			divHorsPériode.classList.remove("bouton-aside-innactif");
 			console.log(`Période selectionnée : Hors période`);
-			changementnotesCons();
+			changementNotesCons();
 		}
-	})
-})
+	});
+});
 	
 
 
@@ -254,8 +250,7 @@ document.querySelectorAll(".header-bouton").forEach(e => {
 			headerBulle = headerBouton.querySelector(".header-bulle");
 			if (headerBulle.style.display === "block" && !e.target.closest(".header-bouton-conf")) headerBulleOff();
 			else headerBulleOn();
-		}
-		else headerBulleOff();
+		} else headerBulleOff();
 		
 		// ON/OFF DE LA BULLE
 		function headerBulleOn() {
@@ -269,13 +264,13 @@ document.querySelectorAll(".header-bouton").forEach(e => {
 			compteurFonctionsAjout();
 			document.querySelectorAll(".header-bulle").forEach(e => {
 				e.style.display = "none";
-			})
+			});
 			document.querySelectorAll(".header-bouton").forEach(e => {
 				e.classList.remove("header-bouton-hover");
-			})
+			});
 		}
-	})
-})
+	});
+});
 
 // AFFICHAGE DES BOUTON DE CONFIRMATION
 let headerBoutonConf;
@@ -289,8 +284,7 @@ document.querySelectorAll(".header-bouton").forEach(e => {
 			headerBulleConf = headerBoutonConf.nextElementSibling;
 			if (headerBulleConf.style.display === "flex") headerBulleConfOff();
 			else headerBulleConfOn();
-		}
-		else headerBulleConfOff();
+		} else headerBulleConfOff();
 		
 		// ON/OFF DE LA BULLE
 		function headerBulleConfOn() {
@@ -298,7 +292,6 @@ document.querySelectorAll(".header-bouton").forEach(e => {
 			headerBulleConfOff();
 			headerBulleConf.style.display = "flex";
 			headerBoutonConf.classList.add("header-bouton-conf-hover");
-			console.log("Confirmation");
 		}
 		function headerBulleConfOff() {
 			compteurFonctionsAjout();
@@ -309,8 +302,8 @@ document.querySelectorAll(".header-bouton").forEach(e => {
 				e.classList.remove("header-bouton-conf-hover");
 			})
 		}
-	})
-})
+	});
+});
 	
 
 
@@ -319,7 +312,7 @@ document.querySelectorAll(".header-bouton").forEach(e => {
 // ACUTALISATION DES NOTES CONSIDÉRÉES ET CONTENUS
 let notesCons = [];
 
-function changementnotesCons() {
+function changementNotesCons() {
 	compteurFonctionsAjout();
 
 	// DÉFINITIONS DES NOTES CONSIDÉRÉES
@@ -372,5 +365,5 @@ addEventListener("DOMContentLoaded", (event) => {
 	document.getElementById("js-info-matière").textContent = `Toutes les matières`;
 	document.getElementById("js-note-dénom").value = "20";
 	document.getElementById("js-note-coef").value = "1";
-	changementnotesCons();
+	changementNotesCons();
 })

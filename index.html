@@ -1,4 +1,5 @@
 <!--
+-EN COURS : Optimisation des conditions dans changementNotesCons() avec .filter.
 -EN COURS : Finir le travail sur le tableau notesCons (notesConsidérées) et s'occuper la fonction qui ajoute les notes dans le tableau avec deux modes; 5 notes, toutes les notes.
 -Ajouter d'autres variables dans les fichiers exportés comme le nom, prénom, la classe.
 -Ajouter la sauvegarde dans le localStorage de l'affichage des éléments et de la période sélectionnées.
@@ -7,112 +8,116 @@
 
 
 
-<head>
-<meta charset="UTF-8">
-<title> Visual Studio Note</title>
-<link rel="stylesheet" href="styles/style_1.css">
-<link rel="stylesheet" href="styles/style_2.css">
-<script src="scripts/script.js" defer></script>
-
-<link rel="icon" type="image/png" href="images/logo_vs_note.png">
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
-</head>
-
-
-
-<body><header>
-<img src="images/logo_vs_note.png" style="height: 60%; margin-left: 8px;">
-<div class="header-bouton" style="cursor: not-allowed; margin-left: 7px; z-index: 2;">
-    <p>Visual Studio Note</p>
-</div>
-<div class="header-bouton">
-    <p>Fichier</p>
-    <div class="header-bulle">
-        <div class="header-bulle-section">
-            <p class="header-bouton-conf">Ouvrir un fichier de notes<span>Ctrl+Shift+O</span></p>
-            <div class="header-bulle-conf">
-                <a>Êtes-vous sûr ?</a>
-                <p onclick="importer()">Oui</p>
-                <p>Non</p>
-            </div>
-            <p onclick="exporter()">Exporter les notes<span>Ctrl+Shift+S</span></p>
-        </div>
-        <hr>
-        <div class="header-bulle-section">
-            <p class="header-bouton-conf">Réinitialiser les notes</p>
-            <div class="header-bulle-conf">
-                <a>Êtes-vous sûr ?</a>
-                <p onclick="notesRéinit()">Oui</p>
-                <p>Non</p>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="barre-de-recherche">
-    <img src="images/recherche_icon.png" style="height: 65%;">
-    <p style="transform: translateY(-1px);">Recherche</p>
-</div>
-<div class="header-bouton" style="cursor: not-allowed; right: 8px; position: absolute;">
-    <p id="js-info"></p>
-</div>
-<hr style="top: calc(0.8 * 42px);">
-</header>
-
-
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <title> Visual Studio Note</title>
+        <link rel="stylesheet" href="styles/style_1.css">
+        <link rel="stylesheet" href="styles/style_2.css">
+        <script src="scripts/script.js" defer></script>
+        <link rel="icon" type="image/png" href="images/logo_vs_note.png">
+        <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+    </head>
     
-<aside>
-<hr style="height: calc(100% - 0.8 * (42px + 1px)); width: calc(0.8 * 1px); left: calc(0.8 * 212px); top: calc(0.8 * 2 + 1px);"></div>
-<div class="titre-aside"><p>PÉRIODES</p></div>
-<div class="bouton-aside" id="js-semestre-1"><img src="images/horloge_icon_1.png" class="image-aside"><p>Semestre 1</p></div>
-<div class="bouton-aside" id="js-semestre-2"><img src="images/horloge_icon_2.png" class="image-aside"><p>Semestre 2</p></div>
-<div class="bouton-aside" id="js-hors-période"><img src="images/horloge_icon.png" class="image-aside"><p>Hors période</p></div>
-<div class="titre-aside"><p>NOTES</p></div>
-<div class="bouton-aside" onclick="onOffContenu(this, `div-ajouter-note`)"><img src="images/plus_icon.png" class="image-aside"><p>Ajouer une note</p></div>
-<div class="bouton-aside" onclick="onOffContenu(this, `div-liste-note`)"><img src="images/liste_icon.png" class="image-aside"><p>Afficher les note</p></div>
-</aside>
-
-
-
-<main>
-<div class="adresse">
-    <span class="style-hover">Virtual Studio Note</span>
-    <img src="images/adresse_icon.png" width="6.5" style="margin-left: 3px; margin-right: 3px;">
-    <span id="js-info-nom" class="style-hover"></span>
-    <img src="images/adresse_icon.png" width="6.5" style="margin-left: 3px; margin-right: 3px;">
-    <span id="js-info-matière" class="style-hover"></span>
-</div><br>
-
-<div class="contenu" id="div-ajouter-note">
-    <div class="numérotation">1<br>2<br>3<br>4<br>5<br>6</div>
-    <a class="vert">//-Ajouter-une-note---------------------------------------------------------------------------</a><br>
-    <span class="bleu-clair">Matière</span><span class="blanc"> : </span><input id="js-matière" style="width: 40px;" autocomplete="off" maxlength="5" placeholder="..."><br>
-    <span class="bleu-clair">Note</span><span class="blanc"> : </span><input id="js-note" autocomplete="off" maxlength="3" placeholder="...">/<input id="js-note-dénom" class="saisieNombre" autocomplete="off" maxlength="3" placeholder="..."><br>
-    <span class="bleu-clair">Moyenne de classe</span><span class="blanc"> : </span><input id="js-moy-classe" autocomplete="off" maxlength="3" placeholder="..."><br>
-    <span class="bleu-clair">Coef</span><span class="blanc"> : </span><input id="js-note-coef" autocomplete="off" maxlength="2" placeholder="..."><br>
-    <button onclick="noteAjout()" style="color: rgb(241, 191, 12);">> Valider?</button> <span class="vert" id="js-note-ajout"></span><span id="js-erreur"></span><br><br>
-</div>
-
-<div class="contenu" id="div-liste-note">
-    <div class="numérotation">1<br>2</div>
-    <a class="vert">//-Les-notes-les-plus-récentes----------------------------------------------------------------</a><br>
-    <table>
-        <tr>
-            <td>Note</td>
-            <td>Note/20</td>
-            <td>Moy. classe</td>
-            <td>Coef</td>
-            <td>Date</td>
-            <td>Impact</td>
-        </tr>
-    </table>
-    <button onclick="contenuTableau" class="gris style-aucun-focus">Afficher moins</button>
-</div>
-</main>
     
-
-
-<footer>
-<hr style="bottom: calc(0.8 * 26px);">
-<p id="js-compteur-fonctions" class="texte-footer"></p>
-<p id="js-info-version" class="texte-footer" style="right : 0px"></p>
-</footer></body>
+    
+    <body>
+        <header>
+            <img src="images/logo_vs_note.png" style="height: 60%; margin-left: 8px;">
+            <div class="header-bouton" style="cursor: not-allowed; margin-left: 7px; z-index: 2;">
+                <p>Visual Studio Note</p>
+            </div>
+            <div class="header-bouton">
+                <p>Fichier</p>
+                <div class="header-bulle">
+                    <div class="header-bulle-section">
+                        <p class="header-bouton-conf">Ouvrir un fichier de notes<span>Ctrl+Shift+O</span></p>
+                        <div class="header-bulle-conf">
+                            <a>Êtes-vous sûr ?</a>
+                            <p onclick="importer()">Oui</p>
+                            <p>Non</p>
+                        </div>
+                        <p onclick="exporter()">Exporter les notes<span>Ctrl+Shift+S</span></p>
+                    </div>
+                    <hr>
+                    <div class="header-bulle-section">
+                        <p class="header-bouton-conf">Réinitialiser les notes</p>
+                        <div class="header-bulle-conf">
+                            <a>Êtes-vous sûr ?</a>
+                            <p onclick="notesRéinit()">Oui</p>
+                            <p>Non</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="barre-de-recherche">
+                <img src="images/recherche_icon.png" style="height: 65%;">
+                <p style="transform: translateY(-1px);">Recherche</p>
+            </div>
+            <div class="header-bouton" style="cursor: not-allowed; right: 8px; position: absolute;">
+                <p id="js-info"></p>
+            </div>
+            <hr style="top: calc(0.8 * 42px);">
+        </header>
+        
+        
+        
+        <aside>
+            <hr style="height: calc(100% - 0.8 * (42px + 1px)); width: calc(0.8 * 1px); left: calc(0.8 * 212px); top: calc(0.8 * 2 + 1px);"></div>
+            <div class="titre-aside"><p>PÉRIODES</p></div>
+            <div class="bouton-aside" id="js-semestre-1"><img src="images/horloge_icon_1.png" class="image-aside"><p>Semestre 1</p></div>
+            <div class="bouton-aside" id="js-semestre-2"><img src="images/horloge_icon_2.png" class="image-aside"><p>Semestre 2</p></div>
+            <div class="bouton-aside" id="js-hors-période"><img src="images/horloge_icon.png" class="image-aside"><p>Hors période</p></div>
+            <div class="titre-aside"><p>NOTES</p></div>
+            <div class="bouton-aside" onclick="onOffContenu(this, `div-ajouter-note`)"><img src="images/plus_icon.png" class="image-aside"><p>Ajouer une note</p></div>
+            <div class="bouton-aside" onclick="onOffContenu(this, `div-liste-note`)"><img src="images/liste_icon.png" class="image-aside"><p>Afficher les note</p></div>
+        </aside>
+        
+        
+        
+        <main>
+            <div class="adresse">
+                <span class="style-hover">Virtual Studio Note</span>
+                <img src="images/adresse_icon.png" width="6.5" style="margin-left: 3px; margin-right: 3px;">
+                <span id="js-info-nom" class="style-hover"></span>
+                <img src="images/adresse_icon.png" width="6.5" style="margin-left: 3px; margin-right: 3px;">
+                <span id="js-info-matière" class="style-hover"></span>
+            </div><br>
+            
+            <div class="contenu" id="div-ajouter-note">
+                <div class="numérotation">1<br>2<br>3<br>4<br>5<br>6</div>
+                <a class="vert">//-Ajouter-une-note---------------------------------------------------------------------------</a><br>
+                <span class="bleu-clair">Matière</span><span class="blanc"> : </span><input id="js-matière" style="width: 40px;" autocomplete="off" maxlength="5" placeholder="..."><br>
+                <span class="bleu-clair">Note</span><span class="blanc"> : </span><input id="js-note" autocomplete="off" maxlength="3" placeholder="...">/<input id="js-note-dénom" class="saisieNombre" autocomplete="off" maxlength="3" placeholder="..."><br>
+                <span class="bleu-clair">Moyenne de classe</span><span class="blanc"> : </span><input id="js-moy-classe" autocomplete="off" maxlength="3" placeholder="..."><br>
+                <span class="bleu-clair">Coef</span><span class="blanc"> : </span><input id="js-note-coef" autocomplete="off" maxlength="2" placeholder="..."><br>
+                <button onclick="noteAjout()" style="color: rgb(241, 191, 12);">> Valider?</button> <span class="vert" id="js-note-ajout"></span><span id="js-erreur"></span><br><br>
+            </div>
+            
+            <div class="contenu" id="div-liste-note">
+                <div class="numérotation">1<br>2</div>
+                <a class="vert">//-Les-notes-les-plus-récentes----------------------------------------------------------------</a><br>
+                <table>
+                    <tr>
+                        <td>Note</td>
+                        <td>Note/20</td>
+                        <td>Moy. classe</td>
+                        <td>Coef</td>
+                        <td>Date</td>
+                        <td>Impact</td>
+                    </tr>
+                </table>
+                <button onclick="contenuTableau" class="gris style-aucun-focus">Afficher moins</button>
+            </div>
+        </main>
+        
+        
+        
+        <footer>
+            <hr style="bottom: calc(0.8 * 26px);">
+            <p id="js-compteur-fonctions" class="texte-footer"></p>
+            <p id="js-info-version" class="texte-footer" style="right : 0px"></p>
+        </footer>
+    </body>
+</html>
