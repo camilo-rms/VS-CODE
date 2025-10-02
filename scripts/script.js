@@ -81,7 +81,7 @@ function noteAjout() {
 		localStorage.setItem("notes", JSON.stringify(notesTempo));
 		console.log("-> Note ajoutée");
 		console.log("    Notes tempo : ", notesTempo);
-		changementNotesCons();
+		actualisationNotes();
 		document.getElementById("js-erreur").textContent = "Note ajoutée !";
 		document.getElementById("js-erreur").style.color = "rgb(81, 219, 18)";
 	}
@@ -128,7 +128,7 @@ function importer() {
 				localStorage.setItem("notes", JSON.stringify(tempoImport));
 				console.log("Notes importées");
 				console.log("Confirmation");
-				changementNotesCons();
+				actualisationNotes();
 			} catch (err) {
 				return;
 			}
@@ -142,8 +142,9 @@ function notesRéinit() {
 	compteurFonctionsAjout();
 	localStorage.removeItem("notes");
 	notesTempo = [];
-	changementNotesCons();
+	actualisationNotes();
 	console.log("Notes réinitialisées");
+	console.log("    Notes tempo : ", notesTempo);
 }
 
 document.addEventListener('keydown', function(e) {
@@ -197,21 +198,21 @@ document.querySelectorAll(".bouton-aside").forEach(e => {
 			divSemestre2.classList.add("bouton-aside-innactif");
 			divHorsPériode.classList.add("bouton-aside-innactif");
 			console.log(`Période selectionnée : Semestre 1`);
-			changementNotesCons();
+			actualisationNotes();
 		} else if (e.target.closest("#js-semestre-2")) {
 			sélectionPériode = "Semestre 2";
 			divSemestre1.classList.add("bouton-aside-innactif");
 			divSemestre2.classList.remove("bouton-aside-innactif");
 			divHorsPériode.classList.add("bouton-aside-innactif");
 			console.log(`Période selectionnée : Semestre 2`);
-			changementNotesCons();
+			actualisationNotes();
 		} else if (e.target.closest("#js-hors-période")) {
 			sélectionPériode = "Hors période";
 			divSemestre1.classList.add("bouton-aside-innactif");
 			divSemestre2.classList.add("bouton-aside-innactif");
 			divHorsPériode.classList.remove("bouton-aside-innactif");
 			console.log(`Période selectionnée : Hors période`);
-			changementNotesCons();
+			actualisationNotes();
 		}
 	});
 });
@@ -312,42 +313,14 @@ document.querySelectorAll(".header-bouton").forEach(e => {
 // ACUTALISATION DES NOTES CONSIDÉRÉES ET CONTENUS
 let notesCons = [];
 
-function changementNotesCons() {
+function actualisationNotes() {
 	compteurFonctionsAjout();
 
-	notesCons = notesTempo.filter()
-
-	// DÉFINITIONS DES NOTES CONSIDÉRÉES
-	// notesCons = [];
-	// if (sélectionMatière === "Toutes les matières") {
-	// 	if (sélectionPériode === "Semestre 1" || sélectionPériode === "Semestre 2") {
-	// 		notesTempo.forEach(élément => {
-	// 			if (élément.type === "note" && élément.période === sélectionPériode) {
-	// 				notesCons.push(élément);
-	// 			}
-	// 		})
-	// 	} else {
-	// 		notesTempo.forEach(élément => {
-	// 			if (élément.type === "note") {
-	// 				notesCons.push(élément);
-	// 			}
-	// 		})
-	// 	}
-	// } else {
-	// 	if (sélectionPériode === "Semestre 1" || sélectionPériode === "Semestre 2") {
-	// 		notesTempo.forEach(élément => {
-	// 			if (élément.type === "note" && élément.matière === sélectionMatière && élément.période === sélectionPériode) {
-	// 				notesCons.push(élément);
-	// 			}
-	// 		})
-	// 	} else {
-	// 		notesTempo.forEach(élément => {
-	// 			if (élément.type === "note" && élément.matière === sélectionMatière) {
-	// 				notesCons.push(élément);
-	// 			}
-	// 		})
-	// 	}
-	// }
+	// CONDITIONS ET DÉFINITION DES NOTES CONSIDÉRÉES
+	notesCons = notesTempo
+	.filter(e => e.type === "note")
+	.filter (e => sélectionMatière === "Toutes les matières" || sélectionMatière === e.matière)
+	.filter (e => sélectionPériode === "Hors période" || sélectionPériode === e.période)
 	console.log("    Notes considérées : ", notesCons);
 }
 
@@ -367,5 +340,5 @@ addEventListener("DOMContentLoaded", (event) => {
 	document.getElementById("js-info-matière").textContent = `Toutes les matières`;
 	document.getElementById("js-note-dénom").value = "20";
 	document.getElementById("js-note-coef").value = "1";
-	changementNotesCons();
+	actualisationNotes();
 })
