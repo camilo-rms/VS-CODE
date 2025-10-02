@@ -315,37 +315,39 @@ let notesCons = [];
 function changementNotesCons() {
 	compteurFonctionsAjout();
 
+	notesCons = notesTempo.filter()
+
 	// DÉFINITIONS DES NOTES CONSIDÉRÉES
-	notesCons = [];
-	if (sélectionMatière === "Toutes les matières") {
-		if (sélectionPériode === "Semestre 1" || sélectionPériode === "Semestre 2") {
-			notesTempo.forEach(élément => {
-				if (élément.type === "note" && élément.période === sélectionPériode) {
-					notesCons.push(élément);
-				}
-			})
-		} else {
-			notesTempo.forEach(élément => {
-				if (élément.type === "note") {
-					notesCons.push(élément);
-				}
-			})
-		}
-	} else {
-		if (sélectionPériode === "Semestre 1" || sélectionPériode === "Semestre 2") {
-			notesTempo.forEach(élément => {
-				if (élément.type === "note" && élément.matière === sélectionMatière && élément.période === sélectionPériode) {
-					notesCons.push(élément);
-				}
-			})
-		} else {
-			notesTempo.forEach(élément => {
-				if (élément.type === "note" && élément.matière === sélectionMatière) {
-					notesCons.push(élément);
-				}
-			})
-		}
-	}
+	// notesCons = [];
+	// if (sélectionMatière === "Toutes les matières") {
+	// 	if (sélectionPériode === "Semestre 1" || sélectionPériode === "Semestre 2") {
+	// 		notesTempo.forEach(élément => {
+	// 			if (élément.type === "note" && élément.période === sélectionPériode) {
+	// 				notesCons.push(élément);
+	// 			}
+	// 		})
+	// 	} else {
+	// 		notesTempo.forEach(élément => {
+	// 			if (élément.type === "note") {
+	// 				notesCons.push(élément);
+	// 			}
+	// 		})
+	// 	}
+	// } else {
+	// 	if (sélectionPériode === "Semestre 1" || sélectionPériode === "Semestre 2") {
+	// 		notesTempo.forEach(élément => {
+	// 			if (élément.type === "note" && élément.matière === sélectionMatière && élément.période === sélectionPériode) {
+	// 				notesCons.push(élément);
+	// 			}
+	// 		})
+	// 	} else {
+	// 		notesTempo.forEach(élément => {
+	// 			if (élément.type === "note" && élément.matière === sélectionMatière) {
+	// 				notesCons.push(élément);
+	// 			}
+	// 		})
+	// 	}
+	// }
 	console.log("    Notes considérées : ", notesCons);
 }
 
