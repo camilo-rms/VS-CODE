@@ -174,6 +174,8 @@ const divSemestre1 = document.getElementById("js-semestre-1");
 const divSemestre2 = document.getElementById("js-semestre-2");
 const divHorsPériode = document.getElementById("js-hors-période");
 
+
+
 // SÉLECTION DU SEMESTRE EN FONCTION DU MOIS
 if (dateMois > 6 && dateMois < 9) {
 	sélectionPériode = "Hors période";
@@ -321,10 +323,35 @@ function actualisationNotes() {
 	.filter(e => e.type === "note")
 	.filter (e => sélectionMatière === "Toutes les matières" || sélectionMatière === e.matière)
 	.filter (e => sélectionPériode === "Hors période" || sélectionPériode === e.période)
-	console.log("    Notes considérées : ", notesCons);
+	console.log(`    Notes considérées (${sélectionPériode}, ${sélectionMatière}) : `, notesCons);
+
+	// CONTENUS
+	contenuTableau();
 }
 
+// TABLEAU DES NOTES
+let contenuTableauMode = "5";
+let contenuTableauDiv = document.getElementById("contenu-tableau");
 
+function contenuTableau(mode) {
+	compteurFonctionsAjout();
+
+	// CHANGEMENT DE MODE
+	if (mode === "click" || contenuTableauMode === "5") contenuTableauMode = "Toutes";
+	if (mode === "click" || contenuTableauMode === "Toutes") contenuTableauMode = "5";
+
+	// ACTUALISATION
+	if (contenuTableauMode = "5") {
+		for (let i = 0; i < 5; i++) {
+			let ligne = document.createElement("tr");
+			
+			let tdNote = document.createElement("td");
+			// tdNote.textContent = `${}`
+
+			contenuTableauDiv.appendChild(ligne)
+		}
+	}
+}
 
 
 
