@@ -337,11 +337,11 @@ function contenuTableau(mode) {
 	compteurFonctionsAjout();
 
 	// CHANGEMENT DE MODE
-	if (mode === "click" || contenuTableauMode === "5") contenuTableauMode = "Toutes";
-	if (mode === "click" || contenuTableauMode === "Toutes") contenuTableauMode = "5";
+	if (mode === 'click' && contenuTableauMode === "5") contenuTableauMode = "toutes";
+	else if (mode === 'click' && contenuTableauMode === "toutes") contenuTableauMode = "5";
 
 	// ACTUALISATION
-	contenuTableauDiv.innerHTML = "";
+	contenuTablegit auDiv.innerHTML = "";
 	if (contenuTableauMode === "5") {
 		notesCons.slice(0, 5).forEach(e => {
 			let ligne = document.createElement("tr");
@@ -352,9 +352,25 @@ function contenuTableau(mode) {
 				ligne.appendChild(td);
 			});
 			contenuTableauDiv.appendChild(ligne);
+			document.getElementById("contenu-tableau-texte").textContent = `Afficher plus (${notesCons.length} notes)`;
+			if (notesCons.length < 5) getElementById("contenu-tableau-texte").style.display = "none";
+		});
+	} else if (contenuTableauMode === "toutes") {
+		notesCons.forEach(e => {
+			let ligne = document.createElement("tr");
+			let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, "-"];
+			infoTableau.forEach(e => {
+				let td = document.createElement("td");
+				td.textContent = e;
+				ligne.appendChild(td);
+			});
+			contenuTableauDiv.appendChild(ligne);
+			document.getElementById("contenu-tableau-texte").textContent = `Afficher moins`;
 		});
 	}
 }
+
+
 
 
 
