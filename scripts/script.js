@@ -341,7 +341,7 @@ function contenuTableau(mode) {
 	else if (mode === 'click' && contenuTableauMode === "toutes") contenuTableauMode = "5";
 
 	// ACTUALISATION
-	contenuTablegit auDiv.innerHTML = "";
+	contenuTableauDiv.innerHTML = "";
 	if (contenuTableauMode === "5") {
 		notesCons.slice(0, 5).forEach(e => {
 			let ligne = document.createElement("tr");
