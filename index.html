@@ -98,16 +98,20 @@
                 <div class="numérotation">1<br>2</div>
                 <a class="vert">//-Les-notes-les-plus-récentes----------------------------------------------------------------</a><br>
                 <table>
-                    <tr>
-                        <td>Note</td>
-                        <td>Note/20</td>
-                        <td>Moy. classe</td>
-                        <td>Coef</td>
-                        <td>Date</td>
-                        <td>Impact</td>
-                    </tr>
+                    <thead>
+                        <tr>
+                            <td>Matière</td>
+                            <td>Note</td>
+                            <td>Note/20</td>
+                            <td>Moy. classe</td>
+                            <td>Coef</td>
+                            <td>Impact</td>
+                        </tr>
+                    </thead>
+                    <tbody id="contenu-tableau">
+                    </tbody>
                 </table>
-                <button onclick="contenuTableau('click')" id="contenu-tableau" class="gris style-aucun-focus">Afficher moins</button>
+                <button onclick="contenuTableau('click')" class="gris style-aucun-focus">Afficher plus</button>
             </div>
         </main>
         

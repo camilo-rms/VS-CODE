@@ -68,7 +68,7 @@ function noteAjout() {
 			matière: matière,
 			note: note,
 			dénom: noteDénom,
-			note20: 20 * (note/noteDénom),
+			note20: Math.round(20 * (note/noteDénom) * 100)/100,
 			moyClasse: moyClasse,
 			coef: noteCoef,
 			id: noteId,
@@ -341,15 +341,18 @@ function contenuTableau(mode) {
 	if (mode === "click" || contenuTableauMode === "Toutes") contenuTableauMode = "5";
 
 	// ACTUALISATION
-	if (contenuTableauMode = "5") {
-		for (let i = 0; i < 5; i++) {
+	contenuTableauDiv.innerHTML = "";
+	if (contenuTableauMode === "5") {
+		notesCons.slice(0, 5).forEach(e => {
 			let ligne = document.createElement("tr");
-			
-			let tdNote = document.createElement("td");
-			// tdNote.textContent = `${}`
-
-			contenuTableauDiv.appendChild(ligne)
-		}
+			let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, "-"];
+			infoTableau.forEach(e => {
+				let td = document.createElement("td");
+				td.textContent = e;
+				ligne.appendChild(td);
+			});
+			contenuTableauDiv.appendChild(ligne);
+		});
 	}
 }
 
