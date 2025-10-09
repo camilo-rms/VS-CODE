@@ -332,6 +332,7 @@ function actualisationNotes() {
 // TABLEAU DES NOTES
 let contenuTableauMode = "5";
 let contenuTableauDiv = document.getElementById("contenu-tableau");
+let contenuTableauTexte = document.getElementById("contenu-tableau-texte");
 
 function contenuTableau(mode) {
 	compteurFonctionsAjout();
@@ -342,30 +343,39 @@ function contenuTableau(mode) {
 
 	// ACTUALISATION
 	contenuTableauDiv.innerHTML = "";
+	if (notesCons.length < 6) contenuTableauTexte.style.display = "none";
+	else contenuTableauTexte.style.display = "block";
 	if (contenuTableauMode === "5") {
+		for (let i = 0; i < 6; i++) {
+			document.getElementById("div-liste-note").innerHTML += `<div class="numérotation">${i+3}`
+			// for (let j = 0; j < i; j++) {
+				document.getElementById("div-liste-note").innerHTML += '<br style="position: absolute;">'
+			// }
+			document.getElementById("div-liste-note").innerHTML += `</div>`
+		}
 		notesCons.slice(0, 5).forEach(e => {
-			let ligne = document.createElement("tr");
-			let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, "-"];
-			infoTableau.forEach(e => {
-				let td = document.createElement("td");
-				td.textContent = e;
-				ligne.appendChild(td);
-			});
-			contenuTableauDiv.appendChild(ligne);
-			document.getElementById("contenu-tableau-texte").textContent = `Afficher plus (${notesCons.length} notes)`;
-			if (notesCons.length < 5) getElementById("contenu-tableau-texte").style.display = "none";
+		let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, "-", "-"];
+		let ligne = document.createElement("tr");
+		infoTableau.forEach(e => {
+			let td = document.createElement("td");
+			td.textContent = e;
+			ligne.appendChild(td);
+		});
+		contenuTableauDiv.appendChild(ligne);
+		if (notesCons.length-5 === 1) contenuTableauTexte.textContent = `Afficher plus (+1 note)`;
+		else contenuTableauTexte.textContent = `Afficher plus (+${notesCons.length-5} notes)`;
 		});
 	} else if (contenuTableauMode === "toutes") {
 		notesCons.forEach(e => {
+			let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, "-", "-"];
 			let ligne = document.createElement("tr");
-			let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, "-"];
 			infoTableau.forEach(e => {
 				let td = document.createElement("td");
 				td.textContent = e;
 				ligne.appendChild(td);
 			});
 			contenuTableauDiv.appendChild(ligne);
-			document.getElementById("contenu-tableau-texte").textContent = `Afficher moins`;
+			contenuTableauTexte.textContent = `Afficher moins`;
 		});
 	}
 }

@@ -64,11 +64,11 @@
         
         <aside>
             <hr style="height: calc(100% - 0.8 * (42px + 1px)); width: calc(0.8 * 1px); left: calc(0.8 * 212px); top: calc(0.8 * 2 + 1px);"></div>
-            <div class="titre-aside"><p>PÉRIODES</p></div>
+            <div class="titre-aside"><p>PÉRIODE</p></div>
             <div class="bouton-aside" id="js-semestre-1"><img src="images/horloge_icon_1.png" class="image-aside"><p>Semestre 1</p></div>
             <div class="bouton-aside" id="js-semestre-2"><img src="images/horloge_icon_2.png" class="image-aside"><p>Semestre 2</p></div>
             <div class="bouton-aside" id="js-hors-période"><img src="images/horloge_icon.png" class="image-aside"><p>Hors période</p></div>
-            <div class="titre-aside"><p>NOTES</p></div>
+            <div class="titre-aside"><p>AFFICHAGE</p></div>
             <div class="bouton-aside" onclick="onOffContenu(this, `div-ajouter-note`)"><img src="images/plus_icon.png" class="image-aside"><p>Ajouer une note</p></div>
             <div class="bouton-aside" onclick="onOffContenu(this, `div-liste-note`)"><img src="images/liste_icon.png" class="image-aside"><p>Afficher les note</p></div>
         </aside>
@@ -86,17 +86,17 @@
             
             <div class="contenu" id="div-ajouter-note">
                 <div class="numérotation">1<br>2<br>3<br>4<br>5<br>6</div>
-                <a class="vert">//-Ajouter-une-note---------------------------------------------------------------------------</a><br>
-                <span class="bleu-clair">Matière</span><span class="blanc"> : </span><input id="js-matière" style="width: 40px;" autocomplete="off" maxlength="5" placeholder="..."><br>
-                <span class="bleu-clair">Note</span><span class="blanc"> : </span><input id="js-note" autocomplete="off" maxlength="5" placeholder="...">/<input id="js-note-dénom" class="saisieNombre" autocomplete="off" maxlength="3" placeholder="..."><br>
+                <a class="vert">//-Ajouter-une-note-------------------------------------------------------------------------------------------</a><br>
+                <span class="bleu-clair">Matière</span><span class="blanc"> : </span><input id="js-matière" autocomplete="off" maxlength="5" placeholder="..."><br>
+                <span class="bleu-clair">Note</span><span class="blanc"> : </span><input id="js-note" autocomplete="off" maxlength="5" placeholder="...">/<input id="js-note-dénom" style="width: 32px;" class="saisieNombre" autocomplete="off" maxlength="3" placeholder="..."><br>
                 <span class="bleu-clair">Moyenne de classe</span><span class="blanc"> : </span><input id="js-moy-classe" autocomplete="off" maxlength="5" placeholder="..."><br>
-                <span class="bleu-clair">Coef</span><span class="blanc"> : </span><input id="js-note-coef" autocomplete="off" maxlength="4" placeholder="..."><br>
+                <span class="bleu-clair">Coef</span><span class="blanc"> : </span><input id="js-note-coef" style="width: 32px;" autocomplete="off" maxlength="4" placeholder="..."><br>
                 <button onclick="noteAjout()" style="color: rgb(241, 191, 12);">> Valider?</button> <span class="vert" id="js-note-ajout"></span><span id="js-erreur"></span><br><br>
             </div>
             
             <div class="contenu" id="div-liste-note">
                 <div class="numérotation">1<br>2</div>
-                <a class="vert">//-Les-notes-les-plus-récentes----------------------------------------------------------------</a><br>
+                <a class="vert">//-Les-notes-les-plus-récentes--------------------------------------------------------------------------------</a><br>
                 <table>
                     <thead>
                         <tr>
@@ -106,6 +106,7 @@
                             <td>Moy. classe</td>
                             <td>Coef</td>
                             <td>Impact</td>
+                            <td>Supprimer</td>
                         </tr>
                     </thead>
                     <tbody id="contenu-tableau">
