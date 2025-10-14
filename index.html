@@ -1,5 +1,4 @@
 <!--
--EN COURS : Finir le travail sur le tableau notesCons (notesConsidérées) et s'occuper la fonction qui ajoute les notes dans le tableau avec deux modes; 5 notes, toutes les notes.
 -Ajouter d'autres variables dans les fichiers exportés comme le nom, prénom, la classe.
 -Ajouter la sauvegarde dans le localStorage de l'affichage des éléments et de la période sélectionnées.
 -Ajouter la date comme propriété pour une note à l'ajout.
@@ -94,10 +93,11 @@
                 <button onclick="noteAjout()" style="color: rgb(241, 191, 12);">> Valider?</button> <span class="vert" id="js-note-ajout"></span><span id="js-erreur"></span><br><br>
             </div>
             
-            <div class="contenu" id="div-liste-note">
+            <div class="contenu" id="div-liste-notes">
                 <div class="numérotation">1<br>2</div>
                 <a class="vert">//-Les-notes-les-plus-récentes--------------------------------------------------------------------------------</a><br>
                 <table>
+                    <div style="position: absolute;" id="contenu-liste-notes-num"></div>
                     <thead>
                         <tr>
                             <td>Matière</td>
@@ -109,10 +109,10 @@
                             <td>Date</td>
                         </tr>
                     </thead>
-                    <tbody id="contenu-tableau">
+                    <tbody id="contenu-liste-notes">
                     </tbody>
                 </table>
-                <button onclick="contenuTableau('click')" class="gris style-aucun-focus" id="contenu-tableau-texte"></button>
+                <button onclick="contenuListeNotes('click')" class="gris style-aucun-focus" id="contenu-liste-notes-texte"></button>
             </div>
         </main>
         

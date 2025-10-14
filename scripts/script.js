@@ -326,43 +326,60 @@ function actualisationNotes() {
 	console.log(`    Notes considérées (${sélectionPériode}, ${sélectionMatière}) : `, notesCons);
 
 	// CONTENUS
-	contenuTableau();
+	contenuListeNotes();
 }
 
 // TABLEAU DES NOTES
-let contenuTableauMode = "5";
-let contenuTableauDiv = document.getElementById("contenu-tableau");
-let contenuTableauTexte = document.getElementById("contenu-tableau-texte");
+let contenuListeNotesMode = "5";
+let contenuListeNotesDiv = document.getElementById("contenu-liste-notes");
+let contenuListeNotesTexte = document.getElementById("contenu-liste-notes-texte");
+let contenuListeNotesNum = document.getElementById("contenu-liste-notes-num");
 
-function contenuTableau(mode) {
+function contenuListeNotes(mode) {
 	compteurFonctionsAjout();
 
 	// CHANGEMENT DE MODE
-	if (mode === 'click' && contenuTableauMode === "5") contenuTableauMode = "toutes";
-	else if (mode === 'click' && contenuTableauMode === "toutes") contenuTableauMode = "5";
+	if (mode === 'click' && contenuListeNotesMode === "5") contenuListeNotesMode = "toutes";
+	else if (mode === 'click' && contenuListeNotesMode === "toutes") contenuListeNotesMode = "5";
 
 	// ACTUALISATION
-	contenuTableauDiv.innerHTML = "";
-	if (notesCons.length < 6) contenuTableauTexte.style.display = "none";
-	else contenuTableauTexte.style.display = "block";
-	if (contenuTableauMode === "5") {
-		// for (let i = 0; i < 5+1; i++) {
-		// 	document.getElementById("div-liste-note").innerHTML += `<div class="numérotation">${i+3}`
-		// 	document.getElementById("div-liste-note").innerHTML += `<br style="position: absolute;"></div>`
-		// }
+	contenuListeNotesDiv.innerHTML = "";
+	if (notesCons.length < 6) contenuListeNotesTexte.style.display = "none";
+	else contenuListeNotesTexte.style.display = "block";
+	if (contenuListeNotesMode === "5") {
+		contenuListeNotesNum.innerHTML = ""
+		for (let i = 3; i < 9; i++) {
+			let div = document.createElement("div");
+			div.className = "numérotation";
+			div.textContent = i;
+			let br = document.createElement("br");
+			br.style.position = "absolute";
+			contenuListeNotesNum.appendChild(br);
+			contenuListeNotesNum.appendChild(div);
+		}
 		notesCons.slice(0, 5).forEach(e => {
-		let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, "-", "-"];
-		let tr = document.createElement("tr");
-		infoTableau.forEach(e => {
-			let td = document.createElement("td");
-			td.textContent = e;
-			tr.appendChild(td);
+		    let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, "-", "-"];
+		    let tr = document.createElement("tr");
+		    infoTableau.forEach(e => {
+		    	let td = document.createElement("td");
+		    	td.textContent = e;
+		    	tr.appendChild(td);
+		    });
+		    contenuListeNotesDiv.appendChild(tr);
+		    if (notesCons.length-5 === 1) contenuListeNotesTexte.textContent = `Afficher plus (+1 note)`;
+		    else contenuListeNotesTexte.textContent = `Afficher plus (+${notesCons.length-5} notes)`;
 		});
-		contenuTableauDiv.appendChild(tr);
-		if (notesCons.length-5 === 1) contenuTableauTexte.textContent = `Afficher plus (+1 note)`;
-		else contenuTableauTexte.textContent = `Afficher plus (+${notesCons.length-5} notes)`;
-		});
-	} else if (contenuTableauMode === "toutes") {
+	} else if (contenuListeNotesMode === "toutes") {
+		contenuListeNotesNum.innerHTML = ""
+		for (let i = 3; i < notesCons.length+4; i++) {
+			let div = document.createElement("div");
+			div.className = "numérotation";
+			div.textContent = i;
+			let br = document.createElement("br");
+			br.style.position = "absolute";
+			contenuListeNotesNum.appendChild(br);
+			contenuListeNotesNum.appendChild(div);
+		}
 		notesCons.forEach(e => {
 			let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, "-", "-"];
 			let tr = document.createElement("tr");
@@ -371,8 +388,8 @@ function contenuTableau(mode) {
 				td.textContent = e;
 				tr.appendChild(td);
 			});
-			contenuTableauDiv.appendChild(tr);
-			contenuTableauTexte.textContent = `Afficher moins`;
+			contenuListeNotesDiv.appendChild(tr);
+			contenuListeNotesTexte.textContent = `Afficher moins`;
 		});
 	}
 }
