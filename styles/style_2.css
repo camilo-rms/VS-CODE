@@ -157,6 +157,8 @@ aside {
     left: 0px;
     top: calc(0.8 * 42px + 1px);
     user-select: none;
+	color: rgb(194, 194, 194);
+    font-weight: 400;
 }
 
 .titre-aside {
@@ -174,7 +176,6 @@ aside {
     padding: 0;
     margin-left: calc(0.8 * 28px);
     font-size: calc(0.8 * 1em);
-    font-weight: 500;
 }
 
 .titre-aside:hover {
