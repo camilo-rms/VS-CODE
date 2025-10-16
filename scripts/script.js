@@ -244,68 +244,67 @@ function onOffContenu(bouton, id) {
 // AFFICHAGE DES BOUTON DANS L'ENTÊTE 
 let headerBouton;
 let headerBulle;
-document.querySelectorAll(".header-bouton").forEach(e => {
-	e.addEventListener("click", e => {
-		
-		// CONDITIONS AU CLIC
-		if (e.target.closest(".header-bouton")) {
-			headerBouton = e.target.closest(".header-bouton");
-			headerBulle = headerBouton.querySelector(".header-bulle");
-			if (headerBulle.style.display === "block" && !e.target.closest(".header-bouton-conf")) headerBulleOff();
-			else headerBulleOn();
-		} else headerBulleOff();
-		
-		// ON/OFF DE LA BULLE
-		function headerBulleOn() {
-			compteurFonctionsAjout();
-			headerBulleOff();
-			headerBulle.style.display = "block";
-			headerBouton.classList.add("header-bouton-hover");
-			console.log("Bouton cliqué");
-		}
-		function headerBulleOff() {
-			compteurFonctionsAjout();
-			document.querySelectorAll(".header-bulle").forEach(e => {
-				e.style.display = "none";
-			});
-			document.querySelectorAll(".header-bouton").forEach(e => {
-				e.classList.remove("header-bouton-hover");
-			});
-		}
-	});
+let headerBoutonsOuverts;
+document.addEventListener("click", e => {
+	
+	// CONDITIONS AU CLIC
+	if (e.target.closest(".header-bouton")) {
+		headerBouton = e.target.closest(".header-bouton");
+		headerBulle = headerBouton.querySelector(".header-bulle");
+		if (headerBulle.style.display === "block" && !e.target.closest(".header-bouton-conf")) headerBulleOff();
+		else headerBulleOn();
+	} else if (headerBoutonsOuverts) headerBulleOff();
+	
+	// ON/OFF DE LA BULLE
+	function headerBulleOn() {
+		compteurFonctionsAjout();
+		headerBulleOff();
+		headerBulle.style.display = "block";
+		headerBouton.classList.add("header-bouton-hover");
+		headerBoutonsOuverts = True;
+		console.log("Bouton cliqué");
+	}
+	function headerBulleOff() {
+		compteurFonctionsAjout();
+		document.querySelectorAll(".header-bulle").forEach(e => {
+			e.style.display = "none";
+		});
+		document.querySelectorAll(".header-bouton").forEach(e => {
+			e.classList.remove("header-bouton-hover");
+		});
+		headerBoutonsOuverts = False;
+	}
 });
 
 // AFFICHAGE DES BOUTON DE CONFIRMATION
 let headerBoutonConf;
 let headerBulleConf;
-document.querySelectorAll(".header-bouton").forEach(e => {
-	e.addEventListener("click", e => {
-		
-		// CONDITIONS AU CLIC
-		if (e.target.closest(".header-bouton-conf")) {
-			headerBoutonConf = e.target.closest(".header-bouton-conf");
-			headerBulleConf = headerBoutonConf.nextElementSibling;
-			if (headerBulleConf.style.display === "flex") headerBulleConfOff();
-			else headerBulleConfOn();
-		} else headerBulleConfOff();
-		
-		// ON/OFF DE LA BULLE
-		function headerBulleConfOn() {
-			compteurFonctionsAjout();
-			headerBulleConfOff();
-			headerBulleConf.style.display = "flex";
-			headerBoutonConf.classList.add("header-bouton-conf-hover");
-		}
-		function headerBulleConfOff() {
-			compteurFonctionsAjout();
-			document.querySelectorAll(".header-bulle-conf").forEach(e => {
-				e.style.display = "none";
-			})
-			document.querySelectorAll(".header-bouton-conf").forEach(e => {
-				e.classList.remove("header-bouton-conf-hover");
-			})
-		}
-	});
+document.addEventListener("click", e => {
+	
+	// CONDITIONS AU CLIC
+	if (e.target.closest(".header-bouton-conf")) {
+		headerBoutonConf = e.target.closest(".header-bouton-conf");
+		headerBulleConf = headerBoutonConf.nextElementSibling;
+		if (headerBulleConf.style.display === "flex") headerBulleConfOff();
+		else headerBulleConfOn();
+	} else if (headerBulleConf.style.display === "block") headerBulleConfOff();
+	
+	// ON/OFF DE LA BULLE
+	function headerBulleConfOn() {
+		compteurFonctionsAjout();
+		headerBulleConfOff();
+		headerBulleConf.style.display = "flex";
+		headerBoutonConf.classList.add("header-bouton-conf-hover");
+	}
+	function headerBulleConfOff() {
+		compteurFonctionsAjout();
+		document.querySelectorAll(".header-bulle-conf").forEach(e => {
+			e.style.display = "none";
+		})
+		document.querySelectorAll(".header-bouton-conf").forEach(e => {
+			e.classList.remove("header-bouton-conf-hover");
+		})
+	}
 });
 	
 
@@ -346,52 +345,36 @@ function contenuListeNotes(mode) {
 	contenuListeNotesDiv.innerHTML = "";
 	if (notesCons.length < 6) contenuListeNotesTexte.style.display = "none";
 	else contenuListeNotesTexte.style.display = "block";
+	contenuListeNotesNum.innerHTML = ""
+	let tempoTableau;
+	let tempoLimite;
 	if (contenuListeNotesMode === "5") {
-		contenuListeNotesNum.innerHTML = ""
-		for (let i = 3; i < 9; i++) {
-			let div = document.createElement("div");
-			div.className = "numérotation";
-			div.textContent = i;
-			let br = document.createElement("br");
-			br.style.position = "absolute";
-			contenuListeNotesNum.appendChild(br);
-			contenuListeNotesNum.appendChild(div);
-		}
-		notesCons.slice(0, 5).forEach(e => {
-		    let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, "-", "-"];
-		    let tr = document.createElement("tr");
-		    infoTableau.forEach(e => {
-		    	let td = document.createElement("td");
-		    	td.textContent = e;
-		    	tr.appendChild(td);
-		    });
-		    contenuListeNotesDiv.appendChild(tr);
-		    if (notesCons.length-5 === 1) contenuListeNotesTexte.textContent = `Afficher plus (+1 note)`;
-		    else contenuListeNotesTexte.textContent = `Afficher plus (+${notesCons.length-5} notes)`;
-		});
+		tab = notesCons.slice(0, 5);
+		limite = 9;
 	} else if (contenuListeNotesMode === "toutes") {
-		contenuListeNotesNum.innerHTML = ""
-		for (let i = 3; i < notesCons.length+4; i++) {
-			let div = document.createElement("div");
-			div.className = "numérotation";
-			div.textContent = i;
-			let br = document.createElement("br");
-			br.style.position = "absolute";
-			contenuListeNotesNum.appendChild(br);
-			contenuListeNotesNum.appendChild(div);
-		}
-		notesCons.forEach(e => {
-			let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, "-", "-"];
-			let tr = document.createElement("tr");
-			infoTableau.forEach(e => {
-				let td = document.createElement("td");
-				td.textContent = e;
-				tr.appendChild(td);
-			});
-			contenuListeNotesDiv.appendChild(tr);
-			contenuListeNotesTexte.textContent = `Afficher moins`;
-		});
+		tab = notesCons;
+		limite = notesCons.length+4;
 	}
+	for (let i = 3; i < limite; i++) {
+		let div = document.createElement("div");
+		div.className = "numérotation";
+		div.textContent = i;
+		let br = document.createElement("br");
+		br.style.position = "absolute";
+		contenuListeNotesNum.appendChild(br);
+		contenuListeNotesNum.appendChild(div);
+	}
+	tab.forEach(e => {
+		let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, "-", "-"];
+		let tr = document.createElement("tr");
+		infoTableau.forEach(e => {
+			let td = document.createElement("td");
+			td.textContent = e;
+			tr.appendChild(td);
+		});
+		contenuListeNotesDiv.appendChild(tr);
+		contenuListeNotesTexte.textContent = `Afficher moins`;
+	});
 }
 
 

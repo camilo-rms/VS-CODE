@@ -238,6 +238,7 @@ main {
     padding-left: calc(0.8 * 85px);
     line-height: 20px;
     user-select: none;
+    white-space: nowrap;
 }
 
 main input {
