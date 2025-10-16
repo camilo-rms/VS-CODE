@@ -346,8 +346,6 @@ function contenuListeNotes(mode) {
 
 	// ACTUALISATION
 	contenuListeNotesDiv.innerHTML = "";
-	if (notesCons.length < 6) contenuListeNotesTexte.style.display = "none";
-	else contenuListeNotesTexte.style.display = "block";
 	contenuListeNotesNum.innerHTML = ""
 	let tab;
 	let limite;
@@ -361,8 +359,13 @@ function contenuListeNotes(mode) {
 		tab = notesCons;
 		limite = notesCons.length+4;
 		message = "Affiche moins";
-	} if (notesCons.length === 0) message = "Aucunes notes ont été ajoutées";
-	// if (notesCons.length < 6) limite = notesCons.length+4;
+	} if (notesCons.length === 0) {
+		message = "Aucune note a été ajoutée";
+		limite = 4;
+	} else if (notesCons.length < 6) {
+		contenuListeNotesTexte.style.display = "none";
+		limite = notesCons.length+3;
+	} else contenuListeNotesTexte.style.display = "block";
 	for (let i = 3; i < limite; i++) {
 		let div = document.createElement("div");
 		div.className = "numérotation";
@@ -373,7 +376,12 @@ function contenuListeNotes(mode) {
 		contenuListeNotesNum.appendChild(div);
 	}
 	tab.forEach(e => {
-		let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, "-", "-"];
+		let période;
+		if (e.période === "Semestre 1") période = "S1"
+		else if (e.période === "Semestre 2") période = "S2"
+		else période = "HP"
+		let date = `${String((new Date(e.timeStamp)).getDate()).padStart(2, 0)}/${String((new Date(e.timeStamp)).getMonth() + 1).padStart(2, 0)} (${période})`;
+		let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, date, "-"];
 		let tr = document.createElement("tr");
 		infoTableau.forEach(e => {
 			let td = document.createElement("td");
@@ -381,9 +389,9 @@ function contenuListeNotes(mode) {
 			tr.appendChild(td);
 		});
 		contenuListeNotesDiv.appendChild(tr);
-		contenuListeNotesTexte.textContent = message;
 	});
-}
+	contenuListeNotesTexte.textContent = message;
+	}
 
 
 
@@ -391,7 +399,7 @@ function contenuListeNotes(mode) {
 
 // DÉFINITIONS ET APPELS DE FONCTIONS
 const infoNom = "Camilo Ramos Jaussi";
-const infoClasse = "1GC";
+const infoClasse = "1G2";
 const infoVersion = "BETA";
 
 addEventListener("DOMContentLoaded", (event) => {
