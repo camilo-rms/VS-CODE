@@ -37,7 +37,7 @@ if (!Array.isArray(notesTempo)) notesTempo = [];
 function noteAjout() {
 	compteurFonctionsAjout();
 	aujourdHui = new Date();
-	const listeMatières = ["FR", "ANG", "ESP", "MATHS", "PHYS", "ES", "NSI", "HG", "EMC", "EPS"];
+	const listeMatières = ["FR", "ANG", "ESPCE", "ESPCO", "MATHS", "PHYS", "ES", "NSI", "HG", "EMC", "EPS"];
 
 	// DÉFINITIONS
 	const matière = document.getElementById("js-matière").value.toUpperCase();
@@ -82,7 +82,7 @@ function noteAjout() {
 		console.log("-> Note ajoutée");
 		console.log("    Notes tempo : ", notesTempo);
 		actualisationNotes();
-		document.getElementById("js-erreur").textContent = "Note ajoutée !";
+		document.getElementById("js-erreur").textContent = "Note ajoutée";
 		document.getElementById("js-erreur").style.color = "rgb(81, 219, 18)";
 	}
 	document.getElementById("js-matière").focus();
@@ -244,11 +244,11 @@ function onOffContenu(bouton, id) {
 // AFFICHAGE DES BOUTON DANS L'ENTÊTE 
 let headerBouton;
 let headerBulle;
-let headerBoutonsOuverts;
+let headerBoutonsOuverts = false;
 document.addEventListener("click", e => {
 	
 	// CONDITIONS AU CLIC
-	if (e.target.closest(".header-bouton")) {
+if (e.target.closest(".header-bouton") && e.target.closest(".header-bouton").querySelector(".header-bulle")) {
 		headerBouton = e.target.closest(".header-bouton");
 		headerBulle = headerBouton.querySelector(".header-bulle");
 		if (headerBulle.style.display === "block" && !e.target.closest(".header-bouton-conf")) headerBulleOff();
@@ -261,7 +261,7 @@ document.addEventListener("click", e => {
 		headerBulleOff();
 		headerBulle.style.display = "block";
 		headerBouton.classList.add("header-bouton-hover");
-		headerBoutonsOuverts = True;
+		headerBoutonsOuverts = true;
 		console.log("Bouton cliqué");
 	}
 	function headerBulleOff() {
@@ -272,13 +272,14 @@ document.addEventListener("click", e => {
 		document.querySelectorAll(".header-bouton").forEach(e => {
 			e.classList.remove("header-bouton-hover");
 		});
-		headerBoutonsOuverts = False;
+		headerBoutonsOuverts = false;
 	}
 });
 
 // AFFICHAGE DES BOUTON DE CONFIRMATION
 let headerBoutonConf;
 let headerBulleConf;
+let headerBullesConfOuvertes = false;
 document.addEventListener("click", e => {
 	
 	// CONDITIONS AU CLIC
@@ -287,7 +288,7 @@ document.addEventListener("click", e => {
 		headerBulleConf = headerBoutonConf.nextElementSibling;
 		if (headerBulleConf.style.display === "flex") headerBulleConfOff();
 		else headerBulleConfOn();
-	} else if (headerBulleConf.style.display === "block") headerBulleConfOff();
+	} else if (headerBullesConfOuvertes) headerBulleConfOff();
 	
 	// ON/OFF DE LA BULLE
 	function headerBulleConfOn() {
@@ -295,6 +296,7 @@ document.addEventListener("click", e => {
 		headerBulleConfOff();
 		headerBulleConf.style.display = "flex";
 		headerBoutonConf.classList.add("header-bouton-conf-hover");
+		headerBullesConfOuvertes = true;
 	}
 	function headerBulleConfOff() {
 		compteurFonctionsAjout();
@@ -304,6 +306,7 @@ document.addEventListener("click", e => {
 		document.querySelectorAll(".header-bouton-conf").forEach(e => {
 			e.classList.remove("header-bouton-conf-hover");
 		})
+		headerBullesConfOuvertes = false;
 	}
 });
 	
@@ -346,15 +349,20 @@ function contenuListeNotes(mode) {
 	if (notesCons.length < 6) contenuListeNotesTexte.style.display = "none";
 	else contenuListeNotesTexte.style.display = "block";
 	contenuListeNotesNum.innerHTML = ""
-	let tempoTableau;
-	let tempoLimite;
+	let tab;
+	let limite;
+	let message;
 	if (contenuListeNotesMode === "5") {
 		tab = notesCons.slice(0, 5);
 		limite = 9;
+		if (notesCons.length-5 === 1) message = "Affiche plus (+1 note)";
+		else message = `Afficher plus (+${notesCons.length-5} notes)`;
 	} else if (contenuListeNotesMode === "toutes") {
 		tab = notesCons;
 		limite = notesCons.length+4;
-	}
+		message = "Affiche moins";
+	} if (notesCons.length === 0) message = "Aucunes notes ont été ajoutées";
+	// if (notesCons.length < 6) limite = notesCons.length+4;
 	for (let i = 3; i < limite; i++) {
 		let div = document.createElement("div");
 		div.className = "numérotation";
@@ -373,7 +381,7 @@ function contenuListeNotes(mode) {
 			tr.appendChild(td);
 		});
 		contenuListeNotesDiv.appendChild(tr);
-		contenuListeNotesTexte.textContent = `Afficher moins`;
+		contenuListeNotesTexte.textContent = message;
 	});
 }
 
