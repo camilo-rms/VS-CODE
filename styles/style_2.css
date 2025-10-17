@@ -322,9 +322,7 @@ footer {
 }
 
 .texte-footer {
-    position: inherit;
     z-index: 100;
-    bottom: -10px;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 0 8px;
+    height: 100%;
 }
