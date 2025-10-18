@@ -1,7 +1,7 @@
 /* ENTÊTE (HEADER) */
 header {
     position: fixed;
-    z-index: 3;
+    z-index: 1;
     margin: 0;
     padding: 0;
     left: 0px;
@@ -28,7 +28,8 @@ header p {
     align-items: center;
     cursor: pointer;
     position: relative;
-    z-index: 3;
+    z-index: 1;
+    font-size: 16.5px;
 }
 
 .header-bouton:hover,
@@ -123,7 +124,6 @@ header button:focus {
 
 /* ENTÊTE - BARRE DE RECHERCHE */
 .barre-de-recherche {
-    z-index: 1;
     position: absolute;
     width: calc(0.8 * 725px);
     height: calc(0.8 * 85%);
@@ -162,7 +162,6 @@ aside {
 }
 
 .titre-aside {
-    z-index: 1;
     height: calc(0.8 * 27px);
     width: 100%;
     margin: 0;
@@ -184,7 +183,6 @@ aside {
 
 /* BARRE LATÉRALE - BOUTONS */
 .bouton-aside {
-    z-index: 10;
     height: calc(0.8 * 27px);
     width: 100%;
     margin: 0;
@@ -224,9 +222,8 @@ aside {
 /* CONTENU PRINCIPAL (MAIN) */
 main {
     position: absolute;
-    z-index: 1;
     width: calc(100% - (0.8 * 212px + 1px + 0.8 * 85px));
-    top: calc(0.8 * 2 * 41px);
+    top: calc(0.8 * 37px);
     left: calc(0.8 * 212px + 1px);
     overflow: hidden;
     padding-bottom: calc(0.8 * 26px + 1px);
@@ -309,7 +306,6 @@ main button:hover {
 /* PIED DE PAGE (FOOTER) */
 footer {
 	position: fixed;
-	z-index: 4;
 	background-color: rgb(24, 24, 24);
     height: calc(0.8 * 26px);
 	width: 100%;
@@ -322,7 +318,6 @@ footer {
 }
 
 .texte-footer {
-    z-index: 100;
     padding: 0 8px;
     height: 100%;
 }
