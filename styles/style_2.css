@@ -265,6 +265,27 @@ main button:hover {
     text-decoration: underline;
 }
 
+.sélection-matière {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: rgb(141, 141, 141);
+    transform: translateX(-68px);
+    background-color: rgb(24, 24, 24);
+    height: 36px;
+    border-collapse: collapse;
+}
+
+.sélection-matière td {
+    border-top: 1px solid rgb(0, 120, 212);
+    padding: 0 23px;
+    height: 100%;
+}
+
+.sélection-matière tr:hover {
+    background-color: unset;
+}
+
 .adresse {
     color: rgb(162, 163, 162);
     position: absolute;

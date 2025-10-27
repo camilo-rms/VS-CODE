@@ -8,6 +8,7 @@ let dateHeure = String(aujourdHui.getHours()).padStart(2, 0);
 let dateMin = String(aujourdHui.getMinutes()).padStart(2, 0);
 let dateSec = String(aujourdHui.getSeconds()).padStart(2, 0);
 let dateMs = String(aujourdHui.getMilliseconds()).padStart(2, 0);
+const listeMatières = ["FR", "ANG", "ESPCE", "ESPCO", "MATHS", "PHYS", "NSI", "ES", "EPS", "HG", "EMC"];
 
 
 
@@ -37,7 +38,6 @@ if (!Array.isArray(notesTempo)) notesTempo = [];
 function noteAjout() {
 	compteurFonctionsAjout();
 	aujourdHui = new Date();
-	const listeMatières = ["FR", "ANG", "ESPCE", "ESPCO", "MATHS", "PHYS", "ES", "NSI", "HG", "EMC", "EPS"];
 
 	// DÉFINITIONS
 	const matière = document.getElementById("js-matière").value.toUpperCase();
