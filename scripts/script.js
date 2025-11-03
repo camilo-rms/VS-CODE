@@ -360,10 +360,14 @@ function contenuListeNotes(mode) {
 		tab = notesCons;
 		limite = notesCons.length+4;
 		message = "Affiche moins";
-	} if (notesCons.length === 0) {
-		message = "Aucune note a été ajoutée";
+	} if (notesTempo.length === 0) {
+		message = "Aucune note n'a été ajoutée";
 		limite = 4;
-	} else if (notesCons.length < 6) {
+	} else if (notesCons.length === 0) {
+		message = "Aucune note ne correspond aux sélections";
+		limite = 4;	
+	}
+	else if (notesCons.length < 6) {
 		contenuListeNotesTexte.style.display = "none";
 		limite = notesCons.length+3;
 	} else contenuListeNotesTexte.style.display = "block";

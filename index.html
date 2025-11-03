@@ -4,6 +4,7 @@
 -Ajouter la sauvegarde dans le localStorage de l'affichage des éléments et de la période sélectionnées.
 -Ajouter la date comme propriété pour une note à l'ajout.
 -Ajouter les détails du footer comme un élément bleu à gauche ou un autre gris clair à droite + gris clair au hover.
+-Ajouter que quand on clique sur les titre-aside on déroule les boutons qui y sont associés.
 -->
 
 
@@ -25,9 +26,6 @@
     <body>
         <header>
             <img src="images/logo_vs_note.png" style="height: 60%; margin-left: 8px;">
-            <div class="header-bouton" style="cursor: not-allowed; margin-left: 7px; z-index: 2;">
-                <p>Visual Studio Note</p>
-            </div>
             <div class="header-bouton">
                 <p>Edit</p>
                 <div class="header-bulle">
@@ -52,7 +50,7 @@
                 </div>
             </div>
             <div class="header-bouton">
-                <p>Informations</p>
+                <p>Modifier</p>
                 <div class="header-bulle">
                     <div class="header-bulle-section">
                         <p class="header-bouton-conf">Modifier les informations<span>Ctrl+Shift+M</span></p>
@@ -85,20 +83,21 @@
         
         
         <main>
-            <table class="sélection-matière">
-                <td>Toutes les matières</td>
-                <td>Français</td>
-                <td>Anglais</td>
-                <td>Espagnol</td>
-                <td>Mathématiques</td>
-                <td>Physique-chimie</td>
-                <td>NSI</td>
-                <td>style_1.css</td>
-                <td>Enseignement scientifique</td>
-                <td>EPS</td>
-                <td>Histoire-géographie</td>
-                <td>EMC</td>
-            </table>
+            <div class="sélection-matière" style="width: 100%;">
+                <table class="sélection-matière" style="transform: translateX(-68px);">
+                    <td>Toutes les matières</td>
+                    <td>Français</td>
+                    <td>Anglais</td>
+                    <td>Espagnol</td>
+                    <td>Mathématiques</td>
+                    <td>Physique-chimie</td>
+                    <td>NSI</td>
+                    <td>Enseignement scientifique</td>
+                    <td>EPS</td>
+                    <td>Histoire-géographie</td>
+                    <td>EMC</td>
+                </table>
+            </div>
             <hr>
             <div class="adresse">
                 <span class="style-hover">Virtual Studio Note</span>
@@ -106,7 +105,7 @@
                 <span id="js-info-nom" class="style-hover"></span>
                 <img src="images/adresse_icon.png" width="6.5" style="margin-left: 3px; margin-right: 3px;">
                 <span id="js-info-matière" class="style-hover"></span>
-            </div><br>
+            </div><br><br>
             
             <div class="contenu" id="div-ajouter-note">
                 <div class="numérotation">1<br>2<br>3<br>4<br>5<br>6</div>
