@@ -25,9 +25,9 @@
     
     <body>
         <header>
-            <img src="images/logo_vs_note.png" style="height: 60%; margin-left: 8px;">
+            <img src="images/logo_vs_note.png" style="height: 60%; margin: 5px;">
             <div class="header-bouton">
-                <p>Edit</p>
+                <p>Notes</p>
                 <div class="header-bulle">
                     <div class="header-bulle-section">
                         <p class="header-bouton-conf">Ouvrir un fichier de notes<span>Ctrl+Shift+O</span></p>
@@ -85,17 +85,17 @@
         <main>
             <div class="sélection-matière" style="width: 100%;">
                 <table class="sélection-matière" style="transform: translateX(-68px);">
-                    <td>Toutes les matières</td>
-                    <td>Français</td>
-                    <td>Anglais</td>
-                    <td>Espagnol</td>
-                    <td>Mathématiques</td>
-                    <td>Physique-chimie</td>
-                    <td>NSI</td>
-                    <td>Enseignement scientifique</td>
-                    <td>EPS</td>
-                    <td>Histoire-géographie</td>
-                    <td>EMC</td>
+                    <td onclick="fonctSélectionMatière('Toutes')">Toutes les matières</td>
+                    <td onclick="fonctSélectionMatière('FR')">Français</td>
+                    <td onclick="fonctSélectionMatière('ANG')">Anglais</td>
+                    <td onclick="fonctSélectionMatière('ESP')">Espagnol</td>
+                    <td onclick="fonctSélectionMatière('MATHS')">Mathématiques</td>
+                    <td onclick="fonctSélectionMatière('PHYS')">Physique-chimie</td>
+                    <td onclick="fonctSélectionMatière('NSI')">NSI</td>
+                    <td onclick="fonctSélectionMatière('ES')">Enseignement scientifique</td>
+                    <td onclick="fonctSélectionMatière('EPS')">EPS</td>
+                    <td onclick="fonctSélectionMatière('HG')">Histoire-géographie</td>
+                    <td onclick="fonctSélectionMatière('EMC')">EMC</td>
                 </table>
             </div>
             <hr>

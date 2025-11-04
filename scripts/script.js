@@ -177,6 +177,28 @@ const divHorsPériode = document.getElementById("js-hors-période");
 
 
 
+
+
+// SÉLECTION DE LA MATIÈRE
+function fonctSélectionMatière(matière) {
+	if (matière === "FR") sélectionMatière = "FR";
+	else if (matière === "ANG") sélectionMatière = "ANG";
+	else if (matière === "ESP") sélectionMatière = "ESP";
+	else if (matière === "MATHS") sélectionMatière = "MATHS";
+	else if (matière === "PHYS") sélectionMatière = "PHYS";
+	else if (matière === "NSI") sélectionMatière = "NSI";
+	else if (matière === "ES") sélectionMatière = "ES";
+	else if (matière === "EPS") sélectionMatière = "EPS";
+	else if (matière === "HG") sélectionMatière = "HG";
+	else if (matière === "EMC") sélectionMatière = "EMC";
+	else sélectionMatière = "Toutes les matières";
+}
+
+
+
+
+
+
 // SÉLECTION DU SEMESTRE EN FONCTION DU MOIS
 if (dateMois > 6 && dateMois < 9) {
 	sélectionPériode = "Hors période";
