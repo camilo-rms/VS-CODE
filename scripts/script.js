@@ -236,7 +236,7 @@ document.querySelectorAll(".bouton-aside").forEach(e => {
 });
 
 // SÉLECTION DE LA MATIÈRE
-function fonctSélectionMatière(matière) {
+function fonctSélectionMatière(el, matière) {
 	compteurFonctionsAjout();
 	if (matière === "FR") sélectionMatière = "FR";
 	else if (matière === "ANG") sélectionMatière = "ANG";
@@ -423,7 +423,7 @@ function contenuListeNotes(mode) {
 
 
 
-	
+
 // DÉFINITIONS ET APPELS DE FONCTIONS
 const infoNom = "Camilo Ramos Jaussi";
 const infoClasse = "1G2";
