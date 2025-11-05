@@ -10,10 +10,6 @@ let dateSec = String(aujourdHui.getSeconds()).padStart(2, 0);
 let dateMs = String(aujourdHui.getMilliseconds()).padStart(2, 0);
 const listeMatières = ["FR", "ANG", "ESPCE", "ESPCO", "MATHS", "PHYS", "NSI", "ES", "EPS", "HG", "EMC"];
 
-
-
-
-
 // COMPTEUR DE FONCTION
 let compteurFonctions = 0;
 compteurFonctionsAjout();
@@ -26,6 +22,10 @@ function compteurFonctionsAjout() {
 		document.getElementById("js-compteur-fonctions").textContent = `${compteurFonctions} fonctions exécutées`;
 	}
 }
+
+
+
+
 
 
 
@@ -89,10 +89,6 @@ function noteAjout() {
 	document.getElementById("js-matière").focus();
 }
 
-
-
-
-
 // EXPORTATION, IMPORTATION, RÉINITIALISATION
 // EXPORTATION
 function exporter() {
@@ -145,7 +141,6 @@ function notesRéinit() {
 	notesTempo = [];
 	actualisationNotes();
 	console.log("Notes réinitialisées");
-	console.log("    Notes tempo : ", notesTempo);
 }
 
 document.addEventListener('keydown', function(e) {
@@ -165,6 +160,28 @@ document.addEventListener('keydown', function(e) {
 	}
 });
 
+// ACUTALISATION DES NOTES ET CONTENUS
+let notesCons = [];
+
+function actualisationNotes() {
+	compteurFonctionsAjout();
+
+	// CONDITIONS ET DÉFINITION DES NOTES CONSIDÉRÉES
+	notesCons = notesTempo
+	.filter(e => e.type === "note")
+	.filter (e => sélectionMatière === "Toutes les matières" || sélectionMatière === e.matière || (sélectionMatière === "ESP" && (e.matière === "ESPCE" || e.matière === "ESPCO")))
+	.filter (e => sélectionPériode === "Hors période" || sélectionPériode === e.période )
+
+	// CONTENUS
+	contenuListeNotes();
+}
+
+
+
+
+
+
+
 
 
 
@@ -174,30 +191,6 @@ let sélectionPériode = "Hors période";
 const divSemestre1 = document.getElementById("js-semestre-1");
 const divSemestre2 = document.getElementById("js-semestre-2");
 const divHorsPériode = document.getElementById("js-hors-période");
-
-
-
-
-
-// SÉLECTION DE LA MATIÈRE
-function fonctSélectionMatière(matière) {
-	if (matière === "FR") sélectionMatière = "FR";
-	else if (matière === "ANG") sélectionMatière = "ANG";
-	else if (matière === "ESP") sélectionMatière = "ESP";
-	else if (matière === "MATHS") sélectionMatière = "MATHS";
-	else if (matière === "PHYS") sélectionMatière = "PHYS";
-	else if (matière === "NSI") sélectionMatière = "NSI";
-	else if (matière === "ES") sélectionMatière = "ES";
-	else if (matière === "EPS") sélectionMatière = "EPS";
-	else if (matière === "HG") sélectionMatière = "HG";
-	else if (matière === "EMC") sélectionMatière = "EMC";
-	else sélectionMatière = "Toutes les matières";
-}
-
-
-
-
-
 
 // SÉLECTION DU SEMESTRE EN FONCTION DU MOIS
 if (dateMois > 6 && dateMois < 9) {
@@ -241,24 +234,28 @@ document.querySelectorAll(".bouton-aside").forEach(e => {
 		}
 	});
 });
-	
 
-
-
-
-// AFFICHAGE DES CONTENUS
-function onOffContenu(bouton, id) {
+// SÉLECTION DE LA MATIÈRE
+function fonctSélectionMatière(matière) {
 	compteurFonctionsAjout();
-	if (document.getElementById(id).style.display === "none") {
-		document.getElementById(id).style.display = "block";
-		bouton.classList.remove("bouton-aside-innactif");
-		console.log("Contenu affiché");
-	} else {
-		document.getElementById(id).style.display = "none";
-		bouton.classList.add("bouton-aside-innactif");
-		console.log("Contenu caché");
-	}
+	if (matière === "FR") sélectionMatière = "FR";
+	else if (matière === "ANG") sélectionMatière = "ANG";
+	else if (matière === "ESP") sélectionMatière = "ESP";
+	else if (matière === "MATHS") sélectionMatière = "MATHS";
+	else if (matière === "PHYS") sélectionMatière = "PHYS";
+	else if (matière === "NSI") sélectionMatière = "NSI";
+	else if (matière === "ES") sélectionMatière = "ES";
+	else if (matière === "EPS") sélectionMatière = "EPS";
+	else if (matière === "HG") sélectionMatière = "HG";
+	else if (matière === "EMC") sélectionMatière = "EMC";
+	else sélectionMatière = "Toutes les matières";
+	console.log("Période sélectionnée :")
+	actualisationNotes();
 }
+
+
+
+
 
 
 
@@ -337,21 +334,19 @@ document.addEventListener("click", e => {
 
 
 
-// ACUTALISATION DES NOTES CONSIDÉRÉES ET CONTENUS
-let notesCons = [];
 
-function actualisationNotes() {
+// AFFICHAGE DES CONTENUS
+function onOffContenu(bouton, id) {
 	compteurFonctionsAjout();
-
-	// CONDITIONS ET DÉFINITION DES NOTES CONSIDÉRÉES
-	notesCons = notesTempo
-	.filter(e => e.type === "note")
-	.filter (e => sélectionMatière === "Toutes les matières" || sélectionMatière === e.matière)
-	.filter (e => sélectionPériode === "Hors période" || sélectionPériode === e.période)
-	console.log(`    Notes considérées (${sélectionPériode}, ${sélectionMatière}) : `, notesCons);
-
-	// CONTENUS
-	contenuListeNotes();
+	if (document.getElementById(id).style.display === "none") {
+		document.getElementById(id).style.display = "block";
+		bouton.classList.remove("bouton-aside-innactif");
+		console.log("Contenu affiché");
+	} else {
+		document.getElementById(id).style.display = "none";
+		bouton.classList.add("bouton-aside-innactif");
+		console.log("Contenu caché");
+	}
 }
 
 // TABLEAU DES NOTES
@@ -424,6 +419,11 @@ function contenuListeNotes(mode) {
 
 
 
+
+
+
+
+	
 // DÉFINITIONS ET APPELS DE FONCTIONS
 const infoNom = "Camilo Ramos Jaussi";
 const infoClasse = "1G2";
