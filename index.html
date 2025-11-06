@@ -5,6 +5,7 @@
 -Ajouter la date comme propriété pour une note à l'ajout.
 -Ajouter les détails du footer comme un élément bleu à gauche ou un autre gris clair à droite + gris clair au hover.
 -Ajouter que quand on clique sur les titre-aside on déroule les boutons qui y sont associés.
+-Ajouter les icons dans la source et la selection de la matière.
 -->
 
 
@@ -83,19 +84,20 @@
         
         
         <main>
-            <div class="sélection-matière" style="width: 100%;">
+            <div class="sélection-matière">
+                <div class="sélection-matière-cache"></div>
                 <table class="sélection-matière" style="transform: translateX(-68px);">
-                    <td onclick="fonctSélectionMatière(this, 'Toutes')">Toutes les matières</td>
-                    <td onclick="fonctSélectionMatière(this, 'FR')">Français</td>
+                    <td onclick="fonctSélectionMatière(this, 'Toutes')" id="js-toutes-les-matières">Toutes les matières</td>
                     <td onclick="fonctSélectionMatière(this, 'ANG')">Anglais</td>
-                    <td onclick="fonctSélectionMatière(this, 'ESP')">Espagnol</td>
-                    <td onclick="fonctSélectionMatière(this, 'MATHS')">Mathématiques</td>
-                    <td onclick="fonctSélectionMatière(this, 'PHYS')">Physique-chimie</td>
-                    <td onclick="fonctSélectionMatière(this, 'NSI')">NSI</td>
-                    <td onclick="fonctSélectionMatière(this, 'ES')">Enseignement scientifique</td>
                     <td onclick="fonctSélectionMatière(this, 'EPS')">EPS</td>
-                    <td onclick="fonctSélectionMatière(this, 'HG')">Histoire-géographie</td>
                     <td onclick="fonctSélectionMatière(this, 'EMC')">EMC</td>
+                    <td onclick="fonctSélectionMatière(this, 'ES')">Ens. scient.</td>
+                    <td onclick="fonctSélectionMatière(this, 'ESP')">Espagnol</td>
+                    <td onclick="fonctSélectionMatière(this, 'FR')">Français</td>
+                    <td onclick="fonctSélectionMatière(this, 'HG')">Histoire-géographie</td>
+                    <td onclick="fonctSélectionMatière(this, 'MATHS')">Mathématiques</td>
+                    <td onclick="fonctSélectionMatière(this, 'NSI')">NSI</td>
+                    <td onclick="fonctSélectionMatière(this, 'PHYS')">Physique-chimie</td>
                 </table>
             </div>
             <hr>

@@ -16,7 +16,7 @@ header {
 }
 
 header p {
-    color: rgb(197, 197, 197);
+    color: rgb(170, 170, 170);
     margin: 8px 7px;
 }
 
@@ -281,12 +281,11 @@ main button:hover {
     min-width: 40px;
     border: 0;
     border-right: 1px solid rgb(40, 40, 40);
+    position: relative;
 }
 
 .sélection-matière td:hover {
-    background-color: rgb(31, 31, 31);
-    /* border-top: 1px solid rgb(0, 120, 212);
-    color: rgb(197, 197, 197); */
+    background-color: rgb(31, 31, 31) !important;
 }
 
 .sélection-matière tr:hover {
@@ -296,6 +295,16 @@ main button:hover {
 .sélection-matière hr {
     width: 1px;
     height: 100%;
+}
+
+.sélection-matière-cache {
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: rgb(31, 31, 31);
+    top: 36px;
+    right: 0;
+    z-index: 1;
 }
 
 .adresse {

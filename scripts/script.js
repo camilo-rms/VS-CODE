@@ -31,6 +31,7 @@ function compteurFonctionsAjout() {
 
 
 
+
 // AJOUT DE NOTES
 let notesTempo = JSON.parse(localStorage.getItem("notes"));
 if (!Array.isArray(notesTempo)) notesTempo = [];
@@ -166,7 +167,7 @@ let notesCons = [];
 function actualisationNotes() {
 	compteurFonctionsAjout();
 
-	// CONDITIONS ET DÉFINITION DES NOTES CONSIDÉRÉES
+	// CONDITIONS
 	notesCons = notesTempo
 	.filter(e => e.type === "note")
 	.filter (e => sélectionMatière === "Toutes les matières" || sélectionMatière === e.matière || (sélectionMatière === "ESP" && (e.matière === "ESPCE" || e.matière === "ESPCO")))
@@ -175,7 +176,6 @@ function actualisationNotes() {
 	// CONTENUS
 	contenuListeNotes();
 }
-
 
 
 
@@ -238,20 +238,65 @@ document.querySelectorAll(".bouton-aside").forEach(e => {
 // SÉLECTION DE LA MATIÈRE
 function fonctSélectionMatière(el, matière) {
 	compteurFonctionsAjout();
-	if (matière === "FR") sélectionMatière = "FR";
-	else if (matière === "ANG") sélectionMatière = "ANG";
-	else if (matière === "ESP") sélectionMatière = "ESP";
-	else if (matière === "MATHS") sélectionMatière = "MATHS";
-	else if (matière === "PHYS") sélectionMatière = "PHYS";
-	else if (matière === "NSI") sélectionMatière = "NSI";
-	else if (matière === "ES") sélectionMatière = "ES";
-	else if (matière === "EPS") sélectionMatière = "EPS";
-	else if (matière === "HG") sélectionMatière = "HG";
-	else if (matière === "EMC") sélectionMatière = "EMC";
-	else sélectionMatière = "Toutes les matières";
-	console.log("Période sélectionnée :")
+	if (matière === "ANG") {
+		sélectionMatière = "ANG";
+		document.getElementById("js-info-matière").textContent = `Anglais`;
+	} else if (matière === "EPS") {
+		sélectionMatière = "EPS";
+		document.getElementById("js-info-matière").textContent = `Éducation physique et sportive`;
+	} else if (matière === "EMC") {
+		sélectionMatière = "EMC";
+		document.getElementById("js-info-matière").textContent = `Éducation morale et civique`;
+	} else if (matière === "ES") {
+		sélectionMatière = "ES";
+		document.getElementById("js-info-matière").textContent = `Enseignement scientifique`;
+	} else if (matière === "ESP") {
+		sélectionMatière = "ESP";
+		document.getElementById("js-info-matière").textContent = `Espagnol`;
+	} else if (matière === "FR") {
+		sélectionMatière = "FR";
+		document.getElementById("js-info-matière").textContent = `Français`;
+    } else if (matière === "HG") {
+		sélectionMatière = "HG";
+		document.getElementById("js-info-matière").textContent = `Histoire-géographie`;
+    } else if (matière === "MATHS") {
+		sélectionMatière = "MATHS";
+		document.getElementById("js-info-matière").textContent = `SPÉ - Mathématiques`;
+    } else if (matière === "NSI") {
+		sélectionMatière = "NSI";
+		document.getElementById("js-info-matière").textContent = `SPÉ - Numérique et sciences informatiques`;
+    } else if (matière === "PHYS") {
+		sélectionMatière = "PHYS";
+		document.getElementById("js-info-matière").textContent = `SPÉ - Physique-chimie`;
+    } else {
+		sélectionMatière = "Toutes les matières";
+		document.getElementById("js-info-matière").textContent = `Toutes les matières`;
+	}
+
+	// STYLES
+	document.querySelectorAll(".sélection-matière td").forEach(e => {
+		e.style.borderTop = "0";
+    	e.style.color = "rgb(127, 127, 127)";
+		e.style.backgroundColor = "rgb(24, 24, 24)";
+	});
+	
+	let cache = document.querySelector(".sélection-matière-cache");
+	cache.style.top = "";
+	cache.style.left = "";
+	cache.style.width = "";
+	cache.style.top = el.getBoundingClientRect().top +1 + "px";
+	cache.style.left = el.getBoundingClientRect().left - cache.getBoundingClientRect().left +0.5 + "px";
+	cache.style.width = el.getBoundingClientRect().width -1 + "px";
+
+	el.style.borderTop = "1px solid rgb(0, 120, 212)";
+    el.style.color = "rgb(197, 197, 197)";
+	el.style.backgroundColor = "rgb(31, 31, 31)";
+
+	// FINALISATIONS
+	console.log("Matière sélectionnée :", sélectionMatière);
 	actualisationNotes();
 }
+
 
 
 
@@ -335,6 +380,10 @@ document.addEventListener("click", e => {
 
 
 
+
+
+
+
 // AFFICHAGE DES CONTENUS
 function onOffContenu(bouton, id) {
 	compteurFonctionsAjout();
@@ -368,31 +417,43 @@ function contenuListeNotes(mode) {
 	let tab;
 	let limite;
 	let message;
+
+	// MODE 5 NOTES
 	if (contenuListeNotesMode === "5") {
 		tab = notesCons.slice(0, 5);
-		limite = 9;
+		limite = 5+4;
 		if (notesCons.length-5 === 1) message = "Affiche plus (+1 note)";
 		else message = `Afficher plus (+${notesCons.length-5} notes)`;
+	
+	// MODE TOUTES LES NOTES
 	} else if (contenuListeNotesMode === "toutes") {
 		tab = notesCons;
 		limite = notesCons.length+4;
 		message = "Affiche moins";
+
+	// CAS 0
 	} if (notesTempo.length === 0) {
 		message = "Aucune note n'a été ajoutée";
 		limite = 4;
+
+	// CAS 0 DANS LA SÉLÉCTION
 	} else if (notesCons.length === 0) {
 		message = "Aucune note ne correspond aux sélections";
 		limite = 4;	
 	}
-	else if (notesCons.length < 6) {
+
+	// CAS SI NOTES <= 5
+	else if (notesCons.length <= 5) {
 		contenuListeNotesTexte.style.display = "none";
 		limite = notesCons.length+3;
+
+	// CAS USUEL
 	} else contenuListeNotesTexte.style.display = "block";
 	for (let i = 3; i < limite; i++) {
 		let div = document.createElement("div");
+		let br = document.createElement("br");
 		div.className = "numérotation";
 		div.textContent = i;
-		let br = document.createElement("br");
 		br.style.position = "absolute";
 		contenuListeNotesNum.appendChild(br);
 		contenuListeNotesNum.appendChild(div);
@@ -433,8 +494,11 @@ addEventListener("DOMContentLoaded", (event) => {
 	document.getElementById("js-info-nom").textContent = `${infoNom}`;
 	document.getElementById("js-info").textContent = `${infoNom} - ${infoClasse}`;
 	document.getElementById("js-info-version").textContent = `Visual Studio Note ${infoVersion}`;
-	document.getElementById("js-info-matière").textContent = `Toutes les matières`;
+	document.getElementById("js-info-matière").textContent = `${sélectionMatière}`;
 	document.getElementById("js-note-dénom").value = "20";
 	document.getElementById("js-note-coef").value = "1";
+	document.getElementById("js-toutes-les-matières").style.borderTop = "1px solid rgb(0, 120, 212)";
+    document.getElementById("js-toutes-les-matières").style.color = "rgb(197, 197, 197)";
+	document.getElementById("js-toutes-les-matières").style.backgroundColor = "rgb(31, 31, 31)";
 	actualisationNotes();
 })
