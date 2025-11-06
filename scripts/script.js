@@ -278,19 +278,14 @@ function fonctSélectionMatière(el, matière) {
 		e.style.borderTop = "0";
     	e.style.color = "rgb(127, 127, 127)";
 		e.style.backgroundColor = "rgb(24, 24, 24)";
+		e.style.borderBottom = "0";
 	});
-	
-	let cache = document.querySelector(".sélection-matière-cache");
-	cache.style.top = "";
-	cache.style.left = "";
-	cache.style.width = "";
-	cache.style.top = el.getBoundingClientRect().top +1 + "px";
-	cache.style.left = el.getBoundingClientRect().left - cache.getBoundingClientRect().left +0.5 + "px";
-	cache.style.width = el.getBoundingClientRect().width -1 + "px";
 
-	el.style.borderTop = "1px solid rgb(0, 120, 212)";
+	el.style.borderTop = "2px solid rgb(0, 120, 212)";
     el.style.color = "rgb(197, 197, 197)";
 	el.style.backgroundColor = "rgb(31, 31, 31)";
+	el.style.borderBottom = "1px solid rgb(31, 31, 31)";
+	el.style.borderBottom = "1px solid red";
 
 	// FINALISATIONS
 	console.log("Matière sélectionnée :", sélectionMatière);
