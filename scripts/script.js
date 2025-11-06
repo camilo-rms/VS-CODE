@@ -236,6 +236,7 @@ document.querySelectorAll(".bouton-aside").forEach(e => {
 });
 
 // SÉLECTION DE LA MATIÈRE
+document.querySelector(".sélection-matière td").click();
 function fonctSélectionMatière(el, matière) {
 	compteurFonctionsAjout();
 	if (matière === "ANG") {
@@ -275,17 +276,9 @@ function fonctSélectionMatière(el, matière) {
 
 	// STYLES
 	document.querySelectorAll(".sélection-matière td").forEach(e => {
-		e.style.borderTop = "0";
-    	e.style.color = "rgb(127, 127, 127)";
-		e.style.backgroundColor = "rgb(24, 24, 24)";
-		e.style.borderBottom = "0";
+		e.classList.remove("sélection-matière-sélectionné");
 	});
-
-	el.style.borderTop = "2px solid rgb(0, 120, 212)";
-    el.style.color = "rgb(197, 197, 197)";
-	el.style.backgroundColor = "rgb(31, 31, 31)";
-	el.style.borderBottom = "1px solid rgb(31, 31, 31)";
-	el.style.borderBottom = "1px solid red";
+	el.classList.add("sélection-matière-sélectionné");
 
 	// FINALISATIONS
 	console.log("Matière sélectionnée :", sélectionMatière);
@@ -492,8 +485,5 @@ addEventListener("DOMContentLoaded", (event) => {
 	document.getElementById("js-info-matière").textContent = `${sélectionMatière}`;
 	document.getElementById("js-note-dénom").value = "20";
 	document.getElementById("js-note-coef").value = "1";
-	document.getElementById("js-toutes-les-matières").style.borderTop = "1px solid rgb(0, 120, 212)";
-    document.getElementById("js-toutes-les-matières").style.color = "rgb(197, 197, 197)";
-	document.getElementById("js-toutes-les-matières").style.backgroundColor = "rgb(31, 31, 31)";
 	actualisationNotes();
 })

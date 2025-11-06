@@ -84,10 +84,10 @@
         
         
         <main>
-            <div class="sélection-matière" style="transform: translate(-68px, -1px);">
-                <table class="sélection-matière" style="background-color: transparent;">
-                    <td onclick="fonctSélectionMatière(this, 'Toutes')" id="js-toutes-les-matières">Toutes les matières</td>
-                    <td onclick="fonctSélectionMatière(this, 'ANG')">Anglais</td>
+            <div class="sélection-matière">
+                <table class="sélection-matière" style="transform: translate(-68px);">
+                    <td onclick="fonctSélectionMatière(this, 'Toutes')">Toutes les matières</td>
+                    <td onclick="fonctSélectionMatière(this, 'ANG')">Anglais<div class="sélection-matière-couleur"></div><div class="sélection-matière-cache"></div></td>
                     <td onclick="fonctSélectionMatière(this, 'EPS')">EPS</td>
                     <td onclick="fonctSélectionMatière(this, 'EMC')">EMC</td>
                     <td onclick="fonctSélectionMatière(this, 'ES')">Ens. scient.</td>
@@ -98,7 +98,7 @@
                     <td onclick="fonctSélectionMatière(this, 'NSI')">NSI</td>
                     <td onclick="fonctSélectionMatière(this, 'PHYS')">Physique-chimie</td>
                 </table>
-                <div style="transform: translateY(-2px); z-index: -1; position: absolute; background-color: rgb(40, 40, 40); width: 100%; height: 2px; left: 0;"></div>
+                <hr>
             </div>
             <div class="adresse">
                 <span class="style-hover">Virtual Studio Note</span>
