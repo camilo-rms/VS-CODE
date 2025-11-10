@@ -49,18 +49,20 @@ function noteAjout() {
 	const noteId = `${String(aujourdHui.getDate()).padStart(2, 0)}${String(aujourdHui.getSeconds()).padStart(2, 0)}-${String(parseInt(Math.floor(Math.random() * 1000))).padStart(3, 0)}`;
 
 	// ERREUR DE REMPLISSAGE
-	function erreurDeRemplissage(erreur) {
+	function erreurDeRemplissage(erreur, focus) {
 		compteurFonctionsAjout();
 		document.getElementById("js-erreur").textContent = erreur;
 		document.getElementById("js-erreur").style.color = "rgb(248, 64, 64)";
+		console.log(focus)
+		document.getElementById(focus).focus();
 	}
 
 	// CONDITIONS DE VALABILITÉ
-	if (!listeMatières.includes(matière)) erreurDeRemplissage(`Matière incorrecte`);
-	else if (noteDénom < 0 || noteDénom === 0 || noteDénom === "0" || isNaN(noteDénom) || noteDénom === "") erreurDeRemplissage(`Dénominateur incorrect`);
-	else if (note < 0 || isNaN(note) || note === "" || note > 1.1 * noteDénom) erreurDeRemplissage(`Note incorrecte`);
-	else if (moyClasse < 0 || isNaN(moyClasse) || moyClasse === "" || moyClasse > 1.1 * noteDénom) erreurDeRemplissage(`Moyenne de classe incorrecte`);
-	else if (noteCoef < 0 || isNaN(noteCoef) || noteCoef === "") erreurDeRemplissage(`Coefficient incorrect`);
+	if (!listeMatières.includes(matière)) erreurDeRemplissage(`Matière incorrecte`, `js-matière`);
+	else if (noteDénom < 0 || noteDénom === 0 || noteDénom === "0" || isNaN(noteDénom) || noteDénom === "") erreurDeRemplissage(`Dénominateur incorrect`, `js-note-dénom`);
+	else if (note < 0 || isNaN(note) || note === "" || note > 1.1 * noteDénom) erreurDeRemplissage(`Note incorrecte`, `js-note`);
+	else if (moyClasse < 0 || isNaN(moyClasse) || moyClasse === "" || moyClasse > 1.1 * noteDénom) erreurDeRemplissage(`Moyenne de classe incorrecte`, `js-moy-classe`);
+	else if (noteCoef < 0 || isNaN(noteCoef) || noteCoef === "" || noteCoef > 16) erreurDeRemplissage(`Coefficient incorrect`, `js-note-coef`);
 	else {
 		document.getElementById("js-erreur").textContent = "";
 
@@ -86,8 +88,9 @@ function noteAjout() {
 		actualisationNotes();
 		document.getElementById("js-erreur").textContent = "Note ajoutée";
 		document.getElementById("js-erreur").style.color = "rgb(81, 219, 18)";
+		if (sélectionMatière !== "Toutes les matières") document.getElementById("js-note").focus();
+		else document.getElementById("js-matière").focus();
 	}
-	document.getElementById("js-matière").focus();
 }
 
 // EXPORTATION, IMPORTATION, RÉINITIALISATION
@@ -242,43 +245,59 @@ function fonctSélectionMatière(el, matière) {
 	if (matière === "ANG") {
 		sélectionMatière = "ANG";
 		document.getElementById("js-info-matière").textContent = `Anglais`;
+		document.getElementById("js-matière").value = "ANG";
 	} else if (matière === "EPS") {
 		sélectionMatière = "EPS";
 		document.getElementById("js-info-matière").textContent = `Éducation physique et sportive`;
+		document.getElementById("js-matière").value = "EPS";
 	} else if (matière === "EMC") {
 		sélectionMatière = "EMC";
 		document.getElementById("js-info-matière").textContent = `Éducation morale et civique`;
+		document.getElementById("js-matière").value = "EMC";
 	} else if (matière === "ES") {
 		sélectionMatière = "ES";
 		document.getElementById("js-info-matière").textContent = `Enseignement scientifique`;
+		document.getElementById("js-matière").value = "ES";
 	} else if (matière === "ESP") {
 		sélectionMatière = "ESP";
 		document.getElementById("js-info-matière").textContent = `Espagnol`;
+		document.getElementById("js-matière").value = "ESP";
 	} else if (matière === "FR") {
 		sélectionMatière = "FR";
 		document.getElementById("js-info-matière").textContent = `Français`;
+		document.getElementById("js-matière").value = "FR";
     } else if (matière === "HG") {
 		sélectionMatière = "HG";
 		document.getElementById("js-info-matière").textContent = `Histoire-géographie`;
+		document.getElementById("js-matière").value = "HG";
     } else if (matière === "MATHS") {
 		sélectionMatière = "MATHS";
 		document.getElementById("js-info-matière").textContent = `SPÉ - Mathématiques`;
+		document.getElementById("js-matière").value = "MATHS";
     } else if (matière === "NSI") {
 		sélectionMatière = "NSI";
 		document.getElementById("js-info-matière").textContent = `SPÉ - Numérique et sciences informatiques`;
+		document.getElementById("js-matière").value = "NSI";
     } else if (matière === "PHYS") {
 		sélectionMatière = "PHYS";
 		document.getElementById("js-info-matière").textContent = `SPÉ - Physique-chimie`;
+		document.getElementById("js-matière").value = "PHYS";
     } else {
 		sélectionMatière = "Toutes les matières";
 		document.getElementById("js-info-matière").textContent = `Toutes les matières`;
 	}
 
 	// STYLES
+	document.getElementById("js-note").value = "";
+	document.getElementById("js-note-dénom").value = "20";
+	document.getElementById("js-moy-classe").value = "";
+	document.getElementById("js-note-coef").value = "1";
+	document.getElementById("js-erreur").textContent = "";
+
 	document.querySelectorAll(".sélection-matière td").forEach(e => {
-		e.classList.remove("sélection-matière-sélectionné");
+		e.classList.remove("sélection-matière-sélectionnée");
 	});
-	el.classList.add("sélection-matière-sélectionné");
+	el.classList.add("sélection-matière-sélectionnée");
 
 	// FINALISATIONS
 	console.log("Matière sélectionnée :", sélectionMatière);
@@ -473,7 +492,7 @@ function contenuListeNotes(mode) {
 
 
 
-// DÉFINITIONS ET APPELS DE FONCTIONS
+// DÉFINITIONS PAR GETELEMENTBYID ET APPELS DE FONCTIONS
 const infoNom = "Camilo Ramos Jaussi";
 const infoClasse = "1G2";
 const infoVersion = "BETA";
@@ -482,7 +501,6 @@ addEventListener("DOMContentLoaded", (event) => {
 	document.getElementById("js-info-nom").textContent = `${infoNom}`;
 	document.getElementById("js-info").textContent = `${infoNom} - ${infoClasse}`;
 	document.getElementById("js-info-version").textContent = `Visual Studio Note ${infoVersion}`;
-	document.getElementById("js-info-matière").textContent = `${sélectionMatière}`;
 	document.getElementById("js-note-dénom").value = "20";
 	document.getElementById("js-note-coef").value = "1";
 	actualisationNotes();
