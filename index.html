@@ -1,10 +1,9 @@
 <!--
     -Ajouter la sauvegarde dans le localStorage de l'affichage des éléments et de la période sélectionnées.
     -Ajouter la date comme propriété pour une note à l'ajout.
-    -Ajouter les détails du footer comme un élément bleu à gauche ou un autre gris clair à droite + gris clair au hover.
+    -Ajouter les détails du footer comme un élément gris clair à droite + gris clair au hover.
     -Ajouter que quand on clique sur les titre-aside on déroule les boutons qui y sont associés.
     -Ajouter les icons dans la source et la selection de la matière.
-    -Ajouter d'autres variables dans les fichiers exportés comme le nom, prénom, la classe.
 -->
 
 
@@ -71,11 +70,11 @@
         
         <aside>
             <hr style="height: calc(100% - 0.8 * (42px + 1px)); width: 1px; left: calc(0.8 * 212px)"></div>
-            <div class="titre-aside"><p>PÉRIODE</p></div>
+            <div class="titre-aside"><p>Période</p></div>
             <div class="bouton-aside" id="js-semestre-1"><img src="images/horloge_icon_1.png" class="image-aside"><p>Semestre 1</p></div>
             <div class="bouton-aside" id="js-semestre-2"><img src="images/horloge_icon_2.png" class="image-aside"><p>Semestre 2</p></div>
             <div class="bouton-aside" id="js-hors-période"><img src="images/horloge_icon.png" class="image-aside"><p>Hors période</p></div>
-            <div class="titre-aside"><p>AFFICHAGE</p></div>
+            <div class="titre-aside"><p>Affichage</p></div>
             <div class="bouton-aside" onclick="onOffContenu(this, `div-ajouter-note`)"><img src="images/plus_icon.png" class="image-aside"><p>Ajouer une note</p></div>
             <div class="bouton-aside" onclick="onOffContenu(this, `div-liste-notes`)"><img src="images/liste_icon.png" class="image-aside"><p>Afficher les note</p></div>
         </aside>

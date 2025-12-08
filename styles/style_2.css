@@ -6,7 +6,7 @@ header {
     padding: 0;
     left: 0px;
     user-select: none;
-    height: calc(0.8 * 42px);
+    height: calc(0.8 * 43px);
     width: 100%;
     display: flex;
     align-items: center;
@@ -125,8 +125,8 @@ header button:focus {
 /* ENTÊTE - BARRE DE RECHERCHE */
 .barre-de-recherche {
     position: absolute;
-    width: calc(0.8 * 725px);
-    height: calc(0.8 * 85%);
+    width: calc(0.8 * 728px);
+    height: calc(0.8 * 27px);
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -155,7 +155,7 @@ aside {
     width: calc(0.8 * 212px);
 	background-color: rgb(24, 24, 24);
     left: 0px;
-    top: calc(0.8 * 42px + 1px);
+    top: calc(0.8 * (42px + 1px));
     user-select: none;
 	color: rgb(194, 194, 194);
     font-weight: 400;
@@ -222,17 +222,14 @@ aside {
 /* CONTENU PRINCIPAL (MAIN) */
 main {
     position: absolute;
-    width: calc(100% - (0.8 * 212px + 1px + 0.8 * 85px));
     width: 100%;
-    top: calc(0.8 * 37px);
-    left: calc(0.8 * 212px + 1px);
+    top: calc(0.8 * (43px));
+    left: calc(0.8 * (212px + 1px + 85px));
     padding-bottom: calc(0.8 * 26px + 1px);
     font-family: Consolas, 'Courier New', monospace;
     font-weight: 200;
     font-size: calc(0.8 * 1.1em);
     color: rgb(116, 116, 116);
-    margin-top: 5px;
-    padding-left: calc(0.8 * 85px);
     line-height: 20px;
     user-select: none;
     white-space: nowrap;
@@ -298,7 +295,7 @@ main button:focus {
 .adresse {
     color: rgb(162, 163, 162);
     position: absolute;
-    left: 31px;
+    left: -31px;
     transform: translateY(2px);
     font-size:0.9em;
     font-weight: 400;

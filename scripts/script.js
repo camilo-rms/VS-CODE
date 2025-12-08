@@ -93,17 +93,16 @@ function noteAjout() {
 	}
 }
 
-// EXPORTATION, IMPORTATION, RÉINITIALISATION
 // EXPORTATION
 function exporter() {
 	compteurFonctionsAjout();
-	const exportTempo = document.createElement("a");
 	dateJour = String(aujourdHui.getDate()).padStart(2, 0);
 	dateMois = String(aujourdHui.getMonth()+1).padStart(2, 0);
 	dateAnnée = String(aujourdHui.getFullYear());
 	dateHeure = String(aujourdHui.getHours()).padStart(2, 0);
 	dateMin = String(aujourdHui.getMinutes()).padStart(2, 0);
 	dateSec = String(aujourdHui.getSeconds()).padStart(2, 0);
+	const exportTempo = document.createElement("a");
 	exportTempo.href = URL.createObjectURL(new Blob ([JSON.stringify(notesTempo)], {type: "application/json"}));
 	exportTempo.download = `Notes ${dateJour}-${dateMois}-${dateAnnée} ${dateHeure}-${dateMin}-${dateSec}.json`;
 	exportTempo.click();
@@ -239,7 +238,6 @@ document.querySelectorAll(".bouton-aside").forEach(e => {
 });
 
 // SÉLECTION DE LA MATIÈRE
-document.querySelector(".sélection-matière td").click();
 function fonctSélectionMatière(el, matière) {
 	compteurFonctionsAjout();
 	if (matière === "ANG") {
@@ -413,7 +411,7 @@ let contenuListeNotesNum = document.getElementById("contenu-liste-notes-num");
 
 function contenuListeNotes(mode) {
 	compteurFonctionsAjout();
-
+	
 	// CHANGEMENT DE MODE
 	if (mode === 'click' && contenuListeNotesMode === "5") contenuListeNotesMode = "toutes";
 	else if (mode === 'click' && contenuListeNotesMode === "toutes") contenuListeNotesMode = "5";
@@ -437,23 +435,23 @@ function contenuListeNotes(mode) {
 		tab = notesCons;
 		limite = notesCons.length+4;
 		message = "Affiche moins";
-
+	
 	// CAS 0
 	} if (notesTempo.length === 0) {
-		message = "Aucune note n'a été ajoutée";
 		limite = 4;
-
+		message = "Aucune note n'a été ajoutée";
+	
 	// CAS 0 DANS LA SÉLÉCTION
 	} else if (notesCons.length === 0) {
+		limite = 4;
 		message = "Aucune note ne correspond aux sélections";
-		limite = 4;	
-	}
+		console.log("truc")
 
 	// CAS SI NOTES <= 5
-	else if (notesCons.length <= 5) {
-		contenuListeNotesTexte.style.display = "none";
+	} else if (notesCons.length <= 5) {
 		limite = notesCons.length+3;
-
+		contenuListeNotesTexte.style.display = "none";
+	
 	// CAS USUEL
 	} else contenuListeNotesTexte.style.display = "block";
 	for (let i = 3; i < limite; i++) {
@@ -467,9 +465,9 @@ function contenuListeNotes(mode) {
 	}
 	tab.forEach(e => {
 		let période;
-		if (e.période === "Semestre 1") période = "S1"
-		else if (e.période === "Semestre 2") période = "S2"
-		else période = "HP"
+		if (e.période === "Semestre 1") période = "S1";
+		else if (e.période === "Semestre 2") période = "S2";
+		else période = "HP";
 		let date = `${String((new Date(e.timeStamp)).getDate()).padStart(2, 0)}/${String((new Date(e.timeStamp)).getMonth() + 1).padStart(2, 0)} (${période})`;
 		let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, date, "-"];
 		let tr = document.createElement("tr");
@@ -492,7 +490,7 @@ function contenuListeNotes(mode) {
 
 
 
-// DÉFINITIONS PAR GETELEMENTBYID ET APPELS DE FONCTIONS
+// SÉLÉCTIONS PAR GETELEMENTBYID ET APPELS DE FONCTIONS
 const infoNom = "Camilo Ramos Jaussi";
 const infoClasse = "1G2";
 const infoVersion = "BETA";
@@ -503,5 +501,6 @@ addEventListener("DOMContentLoaded", (event) => {
 	document.getElementById("js-info-version").textContent = `Visual Studio Note ${infoVersion}`;
 	document.getElementById("js-note-dénom").value = "20";
 	document.getElementById("js-note-coef").value = "1";
+	document.querySelector(".sélection-matière td").click();
 	actualisationNotes();
 })
