@@ -1,9 +1,7 @@
 <!--
-    -Ajouter la sauvegarde dans le localStorage de l'affichage des éléments et de la période sélectionnées.
-    -Ajouter la date comme propriété pour une note à l'ajout.
-    -Ajouter les détails du footer comme un élément gris clair à droite + gris clair au hover.
-    -Ajouter que quand on clique sur les titre-aside on déroule les boutons qui y sont associés.
+    -Ajouter que l'on peut modifier les informations d'une note ou la supprimer dans la liste des notes.
     -Ajouter les icons dans la source et la selection de la matière.
+    -Bien mettre les hovers des boutons dans le header pour que ça fasse comme dans vs code.
 -->
 
 
@@ -15,7 +13,8 @@
         <title> Visual Studio Note</title>
         <link rel="stylesheet" href="styles/style_1.css">
         <link rel="stylesheet" href="styles/style_2.css">
-        <script src="scripts/script.js" defer></script>
+        <script src="scripts/script_1.js" defer></script>
+        <script src="scripts/script_2.js" defer></script>
         <link rel="icon" type="image/png" href="images/logo_vs_note.png">
         <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
     </head>
@@ -53,11 +52,12 @@
                 <div class="header-bulle">
                     <div class="header-bulle-section">
                         <p class="header-bouton-conf">Modifier les informations<span>Ctrl+Shift+M</span></p>
+                        <p class="header-bouton-conf">Modifier les informations<span>Ctrl+Shift+M</span></p>
                     </div>
                 </div>
             </div>
             <div class="barre-de-recherche">
-                <img src="images/recherche_icon.png" style="height: 65%;">
+                <img src="images/recherche.png" style="height: 65%;">
                 <p style="transform: translateY(-1px);">Recherche</p>
             </div>
             <div class="header-bouton" style="cursor: not-allowed; right: 8px; position: absolute;">
@@ -70,13 +70,17 @@
         
         <aside>
             <hr style="height: calc(100% - 0.8 * (42px + 1px)); width: 1px; left: calc(0.8 * 212px)"></div>
-            <div class="titre-aside"><p>Période</p></div>
-            <div class="bouton-aside" id="js-semestre-1"><img src="images/horloge_icon_1.png" class="image-aside"><p>Semestre 1</p></div>
-            <div class="bouton-aside" id="js-semestre-2"><img src="images/horloge_icon_2.png" class="image-aside"><p>Semestre 2</p></div>
-            <div class="bouton-aside" id="js-hors-période"><img src="images/horloge_icon.png" class="image-aside"><p>Hors période</p></div>
-            <div class="titre-aside"><p>Affichage</p></div>
-            <div class="bouton-aside" onclick="onOffContenu(this, `div-ajouter-note`)"><img src="images/plus_icon.png" class="image-aside"><p>Ajouer une note</p></div>
-            <div class="bouton-aside" onclick="onOffContenu(this, `div-liste-notes`)"><img src="images/liste_icon.png" class="image-aside"><p>Afficher les note</p></div>
+            <div class="titre-aside">
+                <div class="titre"><img src="images/flèche.png"><p>Période</p></div>
+                <div class="bouton-aside" id="js-semestre-1"><img src="images/horloge_1.png"><p>Semestre 1</p></div>
+                <div class="bouton-aside" id="js-semestre-2"><img src="images/horloge_2.png"><p>Semestre 2</p></div>
+                <div class="bouton-aside" id="js-hors-période"><img src="images/horloge.png"><p>Hors période</p></div>
+            </div>
+            <div class="titre-aside">
+                <div class="titre"><img src="images/flèche.png"><p>Affichage</p></div>
+                <div class="bouton-aside" onclick="onOffContenu(this, `div-ajouter-note`)"><img src="images/plus.png"><p>Ajouer une note</p></div>
+                <div class="bouton-aside" onclick="onOffContenu(this, `div-liste-notes`)"><img src="images/liste.png"><p>Afficher les note</p></div>
+            </div>
         </aside>
         
         
@@ -98,9 +102,9 @@
             </table>
             <div class="adresse">
                 <span class="style-hover">Virtual Studio Note</span>
-                <img src="images/adresse_icon.png" width="6.5" style="margin-left: 3px; margin-right: 3px;">
+                <img src="images/flèche.png" width="6.5" style="margin-left: 3px; margin-right: 3px;">
                 <span id="js-info-nom" class="style-hover"></span>
-                <img src="images/adresse_icon.png" width="6.5" style="margin-left: 3px; margin-right: 3px;">
+                <img src="images/flèche.png" width="6.5" style="margin-left: 3px; margin-right: 3px;">
                 <span id="js-info-matière" class="style-hover"></span>
             </div><br><br>
             

@@ -32,7 +32,7 @@ function compteurFonctionsAjout() {
 
 
 
-// AJOUT DE NOTES
+// AJOUT ET GESTION DE NOTES
 let notesTempo = JSON.parse(localStorage.getItem("notes"));
 if (!Array.isArray(notesTempo)) notesTempo = [];
 
@@ -311,7 +311,7 @@ function fonctSélectionMatière(el, matière) {
 
 
 
-// AFFICHAGE DES BOUTON DANS L'ENTÊTE 
+// BOUTONS DANS L'ENTÊTE
 let headerBouton;
 let headerBulle;
 let headerBoutonsOuverts = false;
@@ -379,7 +379,6 @@ document.addEventListener("click", e => {
 		headerBullesConfOuvertes = false;
 	}
 });
-	
 
 
 
@@ -389,7 +388,8 @@ document.addEventListener("click", e => {
 
 
 
-// AFFICHAGE DES CONTENUS
+
+// CONTENUS
 function onOffContenu(bouton, id) {
 	compteurFonctionsAjout();
 	if (document.getElementById(id).style.display === "none") {
@@ -402,84 +402,30 @@ function onOffContenu(bouton, id) {
 		console.log("Contenu caché");
 	}
 }
-
-// TABLEAU DES NOTES
-let contenuListeNotesMode = "5";
-let contenuListeNotesDiv = document.getElementById("contenu-liste-notes");
-let contenuListeNotesTexte = document.getElementById("contenu-liste-notes-texte");
-let contenuListeNotesNum = document.getElementById("contenu-liste-notes-num");
-
-function contenuListeNotes(mode) {
-	compteurFonctionsAjout();
 	
-	// CHANGEMENT DE MODE
-	if (mode === 'click' && contenuListeNotesMode === "5") contenuListeNotesMode = "toutes";
-	else if (mode === 'click' && contenuListeNotesMode === "toutes") contenuListeNotesMode = "5";
 
-	// ACTUALISATION
-	contenuListeNotesDiv.innerHTML = "";
-	contenuListeNotesNum.innerHTML = ""
-	let tab;
-	let limite;
-	let message;
 
-	// MODE 5 NOTES
-	if (contenuListeNotesMode === "5") {
-		tab = notesCons.slice(0, 5);
-		limite = 5+4;
-		if (notesCons.length-5 === 1) message = "Affiche plus (+1 note)";
-		else message = `Afficher plus (+${notesCons.length-5} notes)`;
-	
-	// MODE TOUTES LES NOTES
-	} else if (contenuListeNotesMode === "toutes") {
-		tab = notesCons;
-		limite = notesCons.length+4;
-		message = "Affiche moins";
-	
-	// CAS 0
-	} if (notesTempo.length === 0) {
-		limite = 4;
-		message = "Aucune note n'a été ajoutée";
-	
-	// CAS 0 DANS LA SÉLÉCTION
-	} else if (notesCons.length === 0) {
-		limite = 4;
-		message = "Aucune note ne correspond aux sélections";
-		console.log("truc")
 
-	// CAS SI NOTES <= 5
-	} else if (notesCons.length <= 5) {
-		limite = notesCons.length+3;
-		contenuListeNotesTexte.style.display = "none";
-	
-	// CAS USUEL
-	} else contenuListeNotesTexte.style.display = "block";
-	for (let i = 3; i < limite; i++) {
-		let div = document.createElement("div");
-		let br = document.createElement("br");
-		div.className = "numérotation";
-		div.textContent = i;
-		br.style.position = "absolute";
-		contenuListeNotesNum.appendChild(br);
-		contenuListeNotesNum.appendChild(div);
-	}
-	tab.forEach(e => {
-		let période;
-		if (e.période === "Semestre 1") période = "S1";
-		else if (e.période === "Semestre 2") période = "S2";
-		else période = "HP";
-		let date = `${String((new Date(e.timeStamp)).getDate()).padStart(2, 0)}/${String((new Date(e.timeStamp)).getMonth() + 1).padStart(2, 0)} (${période})`;
-		let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, date, "-"];
-		let tr = document.createElement("tr");
-		infoTableau.forEach(e => {
-			let td = document.createElement("td");
-			td.textContent = e;
-			tr.appendChild(td);
+
+
+
+
+
+
+// GESTION DES BOUTONS DU ASIDE
+document.querySelectorAll(".titre-aside .titre").forEach(e => {
+	e.addEventListener("click", el => {
+		el.currentTarget.parentElement.querySelectorAll(".bouton-aside").forEach(enfant => {
+			if (enfant.style.display === "none") {
+				enfant.style.display = "flex";
+				e.querySelector("img").style.transform = "rotate(90deg)";
+			} else {
+				enfant.style.display = "none";
+				e.querySelector("img").style.transform = "rotate(0deg)";
+			}
 		});
-		contenuListeNotesDiv.appendChild(tr);
 	});
-	contenuListeNotesTexte.textContent = message;
-	}
+});
 
 
 

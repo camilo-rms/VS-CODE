@@ -60,28 +60,20 @@ thead {
 /* PRESETS DE COULEURS */
 .gris {
     color: rgb(116, 116, 116);
-}
-.bleu {
+} .bleu {
     color: rgb(73, 142, 207);
-}
-.bleu-clair {
+} .bleu-clair {
     color: rgb(119, 197, 232);
-}
-.marron {
+} .marron {
     color: rgb(163, 114, 93);
-}
-.jaune {
+} .jaune {
     color: rgb(241, 191, 12);
-}
-.blanc {
+} .blanc {
     color: rgb(181, 181, 181);
-}
-.vert {
+} .vert {
     color: rgb(106, 153, 85);
-}
-.vert-clair {
+} .vert-clair {
     color: rgb(81, 219, 18);
-}
-.rouge {
+} .rouge {
     color: rgb(248, 64, 64);
 }
