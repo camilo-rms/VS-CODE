@@ -58,8 +58,8 @@ header {
 .header-bouton-conf-hover,
 .header-bouton-conf-hover span{
     text-decoration: none;
-    background-color: rgb(0, 120, 212);
     border-radius: 4px;
+    background-color: rgb(0, 120, 212);
 	color: rgb(231, 231, 231) !important;
 } .header-bulle hr {
     height: 1px;
@@ -307,6 +307,26 @@ main button:focus {
     outline: 0;
 }
 
+.contenu-liste-notes-clic {
+    display: block;
+    position: absolute;
+    top: 100%;
+    background-color: rgb(31, 31, 31);
+    border: calc(0.8 * 1px) solid rgb(69, 69, 69);
+    border-radius: 5px;
+    min-width: 100px;
+    padding: 4px;
+} .contenu-liste-notes-clic div {
+    padding: 5px 25px;
+	color: rgb(194, 194, 194);
+    white-space: nowrap;
+    border-radius: 4px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+} .contenu-liste-notes-clic div:hover {
+    background-color: rgb(0, 120, 212);
+	color: rgb(231, 231, 231);
+}
 
 
 

@@ -3,6 +3,7 @@ let contenuListeNotesMode = "5";
 let contenuListeNotesDiv = document.getElementById("contenu-liste-notes");
 let contenuListeNotesTexte = document.getElementById("contenu-liste-notes-texte");
 let contenuListeNotesNum = document.getElementById("contenu-liste-notes-num");
+let contenuListeNotesClicDiv = document.getElementById("contenu-liste-notes-clic")
 
 function contenuListeNotes(mode) {
 	compteurFonctionsAjout();
@@ -30,17 +31,19 @@ function contenuListeNotes(mode) {
 		tab = notesCons;
 		limite = notesCons.length+4;
 		message = "Affiche moins";
+		contenuListeNotesTexte.style.display = "block";
 	
 	// CAS 0
 	} if (notesTempo.length === 0) {
 		limite = 4;
 		message = "Aucune note n'a été ajoutée";
+		contenuListeNotesTexte.style.display = "block";
 	
 	// CAS 0 DANS LA SÉLÉCTION
 	} else if (notesCons.length === 0) {
 		limite = 4;
 		message = "Aucune note ne correspond aux sélections";
-		console.log("truc")
+		contenuListeNotesTexte.style.display = "block";
 
 	// CAS SI NOTES <= 5
 	} else if (notesCons.length <= 5) {
@@ -72,8 +75,26 @@ function contenuListeNotes(mode) {
 			tr.appendChild(td);
 		});
 		contenuListeNotesDiv.appendChild(tr);
+		tr.addEventListener("contextmenu", (event) => {
+			event.preventDefault();
+			contenuListeNotesClic(event, e);
+		});
 	});
+
+	// INTERFACE AU CLIC DROIT
+	function contenuListeNotesClic(event, mode, note) {
+		if (mode === "on") {
+			contenuListeNotesClicDiv.style.display = "block";
+			contenuListeNotesClicDiv.style.left = event.clientX-238 + "px";
+			contenuListeNotesClicDiv.style.top = event.clientY-34 + "px";
+			console.log(event.pageX, event.pageY);
+		} if (mode === "on") {
+			contenuListeNotesClicDiv.style.display = "block";
+			contenuListeNotesClicDiv.style.left = event.clientX-238 + "px";
+			contenuListeNotesClicDiv.style.top = event.clientY-34 + "px";
+			console.log(event.pageX, event.pageY);
+		}
+	}
+
 	contenuListeNotesTexte.textContent = message;
 }
-
-document.getElementById("#")

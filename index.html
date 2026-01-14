@@ -1,7 +1,7 @@
 <!--
     -Ajouter que l'on peut modifier les informations d'une note ou la supprimer dans la liste des notes.
     -Ajouter les icons dans la source et la selection de la matière.
-    -Bien mettre les hovers des boutons dans le header pour que ça fasse comme dans vs code.
+    -Bien mettre les hovers des boutons dans le header pour que ça fasse comme dans VS Code.
 -->
 
 
@@ -51,7 +51,6 @@
                 <p>Modifier</p>
                 <div class="header-bulle">
                     <div class="header-bulle-section">
-                        <p class="header-bouton-conf">Modifier les informations<span>Ctrl+Shift+M</span></p>
                         <p class="header-bouton-conf">Modifier les informations<span>Ctrl+Shift+M</span></p>
                     </div>
                 </div>
@@ -138,6 +137,10 @@
                     </tbody>
                 </table>
                 <button onclick="contenuListeNotes('click')" class="gris style-aucun-focus" id="contenu-liste-notes-texte"></button>
+                <div class="contenu-liste-notes-clic" id="contenu-liste-notes-clic">
+                    <div>Supprimer la note</div>
+                    <div>Dupliquer la note</div>
+                </div>
             </div>
         </main>
         

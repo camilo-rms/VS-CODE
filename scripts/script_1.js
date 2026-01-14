@@ -53,7 +53,6 @@ function noteAjout() {
 		compteurFonctionsAjout();
 		document.getElementById("js-erreur").textContent = erreur;
 		document.getElementById("js-erreur").style.color = "rgb(248, 64, 64)";
-		console.log(focus)
 		document.getElementById(focus).focus();
 	}
 
