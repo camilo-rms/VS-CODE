@@ -69,16 +69,26 @@ function contenuListeNotes(mode) {
 		let date = `${String((new Date(e.timeStamp)).getDate()).padStart(2, 0)}/${String((new Date(e.timeStamp)).getMonth() + 1).padStart(2, 0)} (${période})`;
 		let infoTableau = [e.matière, `${e.note}/${e.dénom}`, `${e.note20}/20`, `${e.moyClasse}/${e.dénom}`, e.coef, date, "-"];
 		let tr = document.createElement("tr");
+		tr.note = e;
 		infoTableau.forEach(e => {
 			let td = document.createElement("td");
 			td.textContent = e;
 			tr.appendChild(td);
 		});
-		contenuListeNotesDiv.appendChild(tr);
-		tr.addEventListener("contextmenu", (event) => {
+		document.addEventListener("click", event => {
 			event.preventDefault();
-			contenuListeNotesClic(event, e);
+			if (!event.target.closest("#contenu-liste-notes-clic")) contenuListeNotesClic(event, "off", e);
 		});
+		document.addEventListener("contextmenu", event => {
+			event.preventDefault();
+			if (!event.target.closest("#div-liste-notes table tbody tr")) contenuListeNotesClic(event, "off", e);
+		});
+		tr.addEventListener("contextmenu", event => {
+			event.preventDefault();
+			contenuListeNotesClic(event, "on", tr.note);
+		});
+
+		contenuListeNotesDiv.appendChild(tr);
 	});
 
 	// INTERFACE AU CLIC DROIT
@@ -87,14 +97,16 @@ function contenuListeNotes(mode) {
 			contenuListeNotesClicDiv.style.display = "block";
 			contenuListeNotesClicDiv.style.left = event.clientX-238 + "px";
 			contenuListeNotesClicDiv.style.top = event.clientY-34 + "px";
-			console.log(event.pageX, event.pageY);
-		} if (mode === "on") {
-			contenuListeNotesClicDiv.style.display = "block";
-			contenuListeNotesClicDiv.style.left = event.clientX-238 + "px";
-			contenuListeNotesClicDiv.style.top = event.clientY-34 + "px";
-			console.log(event.pageX, event.pageY);
+			console.log(note);
+		} if (mode === "off") {
+			contenuListeNotesClicDiv.style.display = "none";
 		}
 	}
 
 	contenuListeNotesTexte.textContent = message;
+}
+
+function truc(e) {
+	e.stopPropagation();
+	console.log("yo");
 }
