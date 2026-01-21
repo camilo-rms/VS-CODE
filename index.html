@@ -13,10 +13,12 @@
         <title> Visual Studio Note</title>
         <link rel="stylesheet" href="styles/style_1.css">
         <link rel="stylesheet" href="styles/style_2.css">
+        <link rel="stylesheet" href="styles/style_3.css">
         <script src="scripts/script_1.js" defer></script>
         <script src="scripts/script_2.js" defer></script>
+        <!-- <script src="scripts/script_3.js" defer></script> -->
         <link rel="icon" type="image/png" href="images/logo_vs_note.png">
-        <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet"> -->
     </head>
     
     
@@ -78,6 +80,7 @@
             <div class="titre-aside">
                 <div class="titre"><img src="images/flèche.png"><p>Affichage</p></div>
                 <div class="bouton-aside" onclick="onOffContenu(this, `div-ajouter-note`)"><img src="images/plus.png"><p>Ajouer une note</p></div>
+                <div class="bouton-aside" onclick="onOffContenu(this, `div-supprimer-note`)"><img src="images/moins.png"><p>Ajouer une note</p></div>
                 <div class="bouton-aside" onclick="onOffContenu(this, `div-liste-notes`)"><img src="images/liste.png"><p>Afficher les note</p></div>
             </div>
         </aside>
@@ -110,11 +113,21 @@
             <div class="contenu" id="div-ajouter-note">
                 <div class="numérotation">1<br>2<br>3<br>4<br>5<br>6</div>
                 <a class="vert">//-Ajouter-une-note</a><br>
+                <span class="bleu-clair">Matière</span><span class="blanc"> : </span><input id="js-ajout-matière" autocomplete="off" maxlength="5" placeholder="..."><br>
+                <span class="bleu-clair">Note</span><span class="blanc"> : </span><input id="js-ajout-note" autocomplete="off" maxlength="5" placeholder="...">/<input id="js-ajout-note-dénom" style="width: 32px;" class="saisieNombre" autocomplete="off" maxlength="4" placeholder="..."><br>
+                <span class="bleu-clair">Moyenne de classe</span><span class="blanc"> : </span><input id="js-ajout-moy-classe" autocomplete="off" maxlength="5" placeholder="..."><br>
+                <span class="bleu-clair">Coef</span><span class="blanc"> : </span><input id="js-ajout-note-coef" style="width: 32px;" autocomplete="off" maxlength="4" placeholder="..."><br>
+                <button onclick="noteAjout()" style="color: rgb(241, 191, 12);">> Valider?</button> <span class="vert" id="js-ajout-note-ajout"></span><span id="js-ajout-erreur"></span><br><br>
+            </div>
+            
+            <div class="contenu" id="div-supprimer-note">
+                <div class="numérotation">1<br>2<br>3<br>4<br>5<br>6</div>
+                <a class="vert">//-Supprimer-une-note</a><br>
                 <span class="bleu-clair">Matière</span><span class="blanc"> : </span><input id="js-matière" autocomplete="off" maxlength="5" placeholder="..."><br>
                 <span class="bleu-clair">Note</span><span class="blanc"> : </span><input id="js-note" autocomplete="off" maxlength="5" placeholder="...">/<input id="js-note-dénom" style="width: 32px;" class="saisieNombre" autocomplete="off" maxlength="4" placeholder="..."><br>
                 <span class="bleu-clair">Moyenne de classe</span><span class="blanc"> : </span><input id="js-moy-classe" autocomplete="off" maxlength="5" placeholder="..."><br>
                 <span class="bleu-clair">Coef</span><span class="blanc"> : </span><input id="js-note-coef" style="width: 32px;" autocomplete="off" maxlength="4" placeholder="..."><br>
-                <button onclick="noteAjout()" style="color: rgb(241, 191, 12);">> Valider?</button> <span class="vert" id="js-note-ajout"></span><span id="js-erreur"></span><br><br>
+                <button onclick="noteSuppression()" style="color: rgb(241, 191, 12);">> Valider?</button> <span class="vert" id="js-note-ajout"></span><span id="js-suppression-erreur"></span><br><br>
             </div>
             
             <div class="contenu" id="div-liste-notes">
@@ -137,10 +150,6 @@
                     </tbody>
                 </table>
                 <button onclick="contenuListeNotes('click')" class="gris style-aucun-focus" id="contenu-liste-notes-texte"></button>
-                <div class="contenu-liste-notes-clic" id="contenu-liste-notes-clic">
-                    <div onclick="truc(event)">Supprimer la note</div>
-                    <div>Dupliquer la note</div>
-                </div>
             </div>
         </main>
         

@@ -1,9 +1,75 @@
+function noteAjout() {
+	compteurFonctionsAjout();
+	aujourdHui = new Date();
+
+	// DÉFINITIONS
+	const matière = document.getElementById("js-ajout-matière").value.toUpperCase();
+	const note = document.getElementById("js-ajout-note").value;
+	const noteDénom = document.getElementById("js-ajout-note-dénom").value;
+	const moyClasse = document.getElementById("js-ajout-moy-classe").value;
+	const noteCoef = document.getElementById("js-ajout-note-coef").value;
+	const noteId = `${String(aujourdHui.getDate()).padStart(2, 0)}${String(aujourdHui.getSeconds()).padStart(2, 0)}-${String(parseInt(Math.floor(Math.random() * 1000))).padStart(3, 0)}`;
+
+	// ERREUR DE REMPLISSAGE
+	function erreurDeRemplissage(erreur, focus) {
+		compteurFonctionsAjout();
+		document.getElementById("js-ajout-erreur").textContent = erreur;
+		document.getElementById("js-ajout-erreur").style.color = "rgb(248, 64, 64)";
+		document.getElementById(focus).focus();
+	}
+
+	// CONDITIONS DE VALABILITÉ
+	if (!listeMatières.includes(matière)) erreurDeRemplissage(`Matière incorrecte`, `js-ajout-matière`);
+	else if (noteDénom < 0 || noteDénom === 0 || noteDénom === "0" || isNaN(noteDénom) || noteDénom === "") erreurDeRemplissage(`Dénominateur incorrect`, `js-ajout-note-dénom`);
+	else if (note < 0 || isNaN(note) || note === "" || note > 1.1 * noteDénom) erreurDeRemplissage(`Note incorrecte`, `js-ajout-note`);
+	else if (moyClasse < 0 || isNaN(moyClasse) || moyClasse === "" || moyClasse > 1.1 * noteDénom) erreurDeRemplissage(`Moyenne de classe incorrecte`, `js-ajout-moy-classe`);
+	else if (noteCoef < 0 || isNaN(noteCoef) || noteCoef === "" || noteCoef > 16) erreurDeRemplissage(`Coefficient incorrect`, `js-note-coef`);
+	else {
+		document.getElementById("js-ajout-erreur").textContent = "";
+
+		// AJOUT
+		notesTempo.push({
+			type: "note",
+			matière: matière,
+			note: note,
+			dénom: noteDénom,
+			note20: Math.round(20 * (note/noteDénom) * 100)/100,
+			moyClasse: moyClasse,
+			coef: noteCoef,
+			id: noteId,
+			timeStamp: aujourdHui.getTime(),
+			période: sélectionPériode
+		});
+
+		// FINALISATIONS
+		notesTempo.sort((a, b) => b.timeStamp - a.timeStamp);
+		localStorage.setItem("notes", JSON.stringify(notesTempo));
+		console.log("-> Note ajoutée");
+		console.log("    Notes tempo : ", notesTempo);
+		actualisationNotes();
+		document.getElementById("js-ajout-erreur").textContent = "Note ajoutée";
+		document.getElementById("js-ajout-erreur").style.color = "rgb(81, 219, 18)";
+		if (sélectionMatière !== "Toutes les matières") document.getElementById("js-ajout-note").focus();
+		else document.getElementById("js-ajout-matière").focus();
+	}
+}
+
+
+
+
+
+
+
+
+
+
 // TABLEAU DES NOTES
 let contenuListeNotesMode = "5";
 let contenuListeNotesDiv = document.getElementById("contenu-liste-notes");
 let contenuListeNotesTexte = document.getElementById("contenu-liste-notes-texte");
 let contenuListeNotesNum = document.getElementById("contenu-liste-notes-num");
 let contenuListeNotesClicDiv = document.getElementById("contenu-liste-notes-clic")
+let contenuListeNotesNote;
 
 function contenuListeNotes(mode) {
 	compteurFonctionsAjout();
@@ -75,38 +141,8 @@ function contenuListeNotes(mode) {
 			td.textContent = e;
 			tr.appendChild(td);
 		});
-		document.addEventListener("click", event => {
-			event.preventDefault();
-			if (!event.target.closest("#contenu-liste-notes-clic")) contenuListeNotesClic(event, "off", e);
-		});
-		document.addEventListener("contextmenu", event => {
-			event.preventDefault();
-			if (!event.target.closest("#div-liste-notes table tbody tr")) contenuListeNotesClic(event, "off", e);
-		});
-		tr.addEventListener("contextmenu", event => {
-			event.preventDefault();
-			contenuListeNotesClic(event, "on", tr.note);
-		});
 
 		contenuListeNotesDiv.appendChild(tr);
 	});
-
-	// INTERFACE AU CLIC DROIT
-	function contenuListeNotesClic(event, mode, note) {
-		if (mode === "on") {
-			contenuListeNotesClicDiv.style.display = "block";
-			contenuListeNotesClicDiv.style.left = event.clientX-238 + "px";
-			contenuListeNotesClicDiv.style.top = event.clientY-34 + "px";
-			console.log(note);
-		} if (mode === "off") {
-			contenuListeNotesClicDiv.style.display = "none";
-		}
-	}
-
 	contenuListeNotesTexte.textContent = message;
-}
-
-function truc(e) {
-	e.stopPropagation();
-	console.log("yo");
 }
